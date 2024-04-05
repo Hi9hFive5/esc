@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.ColumnDefault;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,13 +22,10 @@ public class RecruitApplication {
     @Column(name = "recruit_status")
     private String recruitStatus;
 
-//    @JoinColumn(name = "id")
-//    @ManyToOne
     @Column(name = "recruit_user_id")
     private int recruitUserId;
 
-    @ManyToOne
-    @JoinColumn(name = "recruit_post_id")
-    private RecruitPost recruitPost;
+    @Column(name = "recruit_post_id")
+    private int recruitPost;
 
 }
