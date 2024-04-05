@@ -1,0 +1,42 @@
+package org.highfives.esc.recruit.entity;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@ToString
+@Entity
+@Table(name = "recruit_post")
+public class RecruitPost {
+
+    @Id
+    @Column(name = "id")
+    private int id;
+
+    @Column(name = "delete_status")
+    private String deleteStatus;
+
+    @Column(name = "recruit_status")
+    private String recruitStatus;
+
+    @Column(name = "title")
+    private String title;
+
+    @Column(name = "content")
+    private String content;
+
+    @Column(name = "created_date")
+    private String createdDate;
+
+    @Column(name = "writer_id")
+    private int writerId;
+
+    @Column(name = "club_id")
+    private int clubId;
+
+}
