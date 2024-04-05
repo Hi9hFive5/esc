@@ -1,10 +1,14 @@
 package org.highfives.esc.studyclub.dto;
 
-import jakarta.persistence.Column;
-import lombok.Data;
+import lombok.*;
 
-@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@ToString
 public class StudyclubDTO {
+
     private int id;
 
     private String name;
@@ -22,4 +26,5 @@ public class StudyclubDTO {
     private int memberCount;
 
     private int studyId;
+
 }

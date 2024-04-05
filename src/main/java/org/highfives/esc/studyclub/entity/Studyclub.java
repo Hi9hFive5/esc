@@ -1,35 +1,48 @@
 package org.highfives.esc.studyclub.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-@Table(name = "studyclub")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@ToString
 @Entity
+@Table(name = "studyclub")
 public class Studyclub {
+
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "name", length = 255, nullable = false)
-    private String name;
-
-    @Column(name = "introduce", length = 255, nullable = false)
-    private String introduce;
-
-    @Column(name = "member_limit", nullable = false)
-    private int memberLimit;
-
-    @Column(name = "leader_id", nullable = false)
-    private int leaderId;
-
-    @Column(name = "end_date", nullable = false)
-    private java.util.Date endDate;
-
-    @Column(name = "delete_status", length = 1, nullable = false)
+    @Column(name = "delete_status")
     private String deleteStatus;
 
-    @Column(name = "member_count", nullable = false)
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "introduce")
+    private String introduce;
+
+    @Column(name = "member_count")
     private int memberCount;
-    @Column(name = "study_id", nullable = false)
+
+    @Column(name = "member_limit")
+    private int memberLimit;
+
+    @Column(name = "end_date")
+    private String endDate;
+
+    @Column(name = "leader_id")
+    private int leaderId;
+
+    @Column(name = "study_id")
     private int studyId;
+
 }
