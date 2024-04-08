@@ -45,7 +45,7 @@ public class StudyclubController {
         return ResponseEntity.ok().body(studyclub);
     }
 
-    // 스터디클럽 내용 업데이트(기존 스터디클럽 내용 조회해서 보여주기)
+    // 스터디클럽 내용 수정(기존 스터디클럽 내용 조회해서 보여주기)
     @PutMapping("/modify/{studyclubId}")
     public ResponseEntity<StudyclubDTO> modifyStudyclub(@PathVariable int studyclubId, @RequestBody StudyclubVO studyclubVO) {
 
@@ -54,7 +54,7 @@ public class StudyclubController {
         return ResponseEntity.ok().body(studyclub);
     }
 
-    // 스터디클럽 삭제 상태로 업데이트
+    // 스터디클럽 삭제 상태로 변경
     @PutMapping("/delete/{studyclubId}")
     public ResponseEntity<StudyclubDTO> deleteStudyclub(@PathVariable int studyclubId) {
 

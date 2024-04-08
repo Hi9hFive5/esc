@@ -6,6 +6,8 @@ import org.highfives.esc.recruit.vo.RecruitPostVO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/recruit")
 public class RecruitController {
@@ -14,31 +16,55 @@ public class RecruitController {
 
     public RecruitController(RecruitService recruitService) { this.recruitService = recruitService; }
 
-    // 모집글 작성
-    @PostMapping("/regist/{clubId}")
-    public ResponseEntity<RecruitPostDTO> registRecruitPost(@RequestBody RecruitPostVO recruitPostVO, int clubId) {
+    @GetMapping("/list")
+    public ResponseEntity<List<RecruitPostDTO>> findRecruitPosts() {
 
-        RecruitPostDTO recruitPost = recruitService.registRecruitPost(recruitPostVO, clubId);
+        List<RecruitPostDTO> recruitPostList = recruitService.findAllRecruitPosts();
+
+        return ResponseEntity.ok().body(recruitPostList);
     }
 
+    @GetMapping("/list/{leaderId}")
+    public ResponseEntity<List<RecruitPostDTO>> findRecruitPostByLeaderId(@PathVariable int leaderId) {
 
+        List<RecruitPostDTO> recruitPostList = recruitService.findRecruitPostsByLeaderId(leaderId);
 
-    // 모집글 수정
+        return ResponseEntity.ok().body(recruitPostList);
+    }
 
+    @GetMapping("/detail/{postId}")
+    public ResponseEntity<RecruitPostDTO> findRecruitPostById(@PathVariable int postId) {
 
-    // 모집글 삭제
+        RecruitPostDTO recruitPost = recruitService.findRecruitPostById(postId);
 
+        return ResponseEntity.ok().body(recruitPost);
+    }
 
-    // 모집글 신청
+    // 모집글 작성
+    @PostMapping("/regist/{clubId}")
+    public ResponseEntity<RecruitPostDTO> registRecruitPost(@RequestBody RecruitPostVO recruitPostVO, @PathVariable int clubId) {
 
+        RecruitPostDTO recruitPost = recruitService.registRecruitPost(recruitPostVO, clubId);
 
-    // 모집글 신청 수락
+        return ResponseEntity.ok().body(recruitPost);
+    }
 
+    // 모집글 내용 수정(기존 모집글 내용 조회해서 보여주기)
+    @PutMapping("/modify/{recruitId}")
+    public ResponseEntity<RecruitPostDTO> modifyRecruitPost(@PathVariable int recruitId, @RequestBody RecruitPostVO recruitPostVO) {
 
-    // 모집글 신청 거절
+        RecruitPostDTO recruitPost = recruitService.modifyRecruitPost(recruitId, recruitPostVO);
 
+        return ResponseEntity.ok().body(recruitPost);
+    }
 
-    // 회원 아이디로 모집글 신청 리스트 조회
+    // 모집글 삭제 상태로 변경
+    @PutMapping("/delete/{recruitId}")
+    public ResponseEntity<RecruitPostDTO> deleteRecruitPost(@PathVariable int recruitId) {
 
+        RecruitPostDTO recruitPost = recruitService.deleteRecruitPost(recruitId);
+
+        return ResponseEntity.ok().body(recruitPost);
+    }
 
 }

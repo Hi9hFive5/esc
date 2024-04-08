@@ -2,7 +2,7 @@ package org.highfives.esc.studyclub.service;
 
 import org.highfives.esc.studyclub.dto.StudyclubDTO;
 import org.highfives.esc.studyclub.entity.Studyclub;
-import org.highfives.esc.studyclub.repository.StudyclubRepository;
+import org.highfives.esc.studyclub.repository.StudyclubRepo;
 import org.highfives.esc.studyclub.vo.StudyclubVO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +16,10 @@ import java.util.List;
 public class StudyclubService {
 
     private final ModelMapper mapper;
-    private final StudyclubRepository studyclubRepo;
+    private final StudyclubRepo studyclubRepo;
 
     @Autowired
-    public StudyclubService(ModelMapper mapper, StudyclubRepository studyclubRepo) {
+    public StudyclubService(ModelMapper mapper, StudyclubRepo studyclubRepo) {
         this.mapper = mapper;
         this.studyclubRepo = studyclubRepo;
     }

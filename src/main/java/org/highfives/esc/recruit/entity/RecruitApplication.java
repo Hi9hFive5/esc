@@ -1,15 +1,13 @@
 package org.highfives.esc.recruit.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@Setter
 @ToString
 @Entity
 @Table(name = "application_club_recruitment")
@@ -26,6 +24,6 @@ public class RecruitApplication {
     private int recruitUserId;
 
     @Column(name = "recruit_post_id")
-    private int recruitPost;
+    private int recruitPostId;
 
 }
