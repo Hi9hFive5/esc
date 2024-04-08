@@ -1,11 +1,9 @@
-package org.highfives.esc.user.dto;
+package org.highfives.esc.User.vo;
 
-
-import jakarta.persistence.Column;
 import lombok.Data;
 
 @Data
-public class UserDTO {
+public class ResponseUserVO {
     private int id;
 
     private String name;
@@ -25,5 +23,4 @@ public class UserDTO {
     private int point;
 
     private java.util.Date end_date;
-
 }

@@ -1,9 +1,19 @@
-package org.highfives.esc.user.entity;
+package org.highfives.esc.User.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import org.highfives.esc.User.type.enums.UserStatus;
+
+import java.util.Date;
 
 @Entity
 @Table(name = "user")
+@Getter
+@NoArgsConstructor
+@ToString
 public class User {
 
     @Id
@@ -27,8 +37,19 @@ public class User {
     @Column(name = "point")
     private int point;
     @Column(name = "end_date")
-    private java.util.Date endDate;
+    private String endDate;
 
-
-
+    @Builder
+    public User(int id, String name, String email, String nickname, String status, String password, int reportCount, int grade, int point, String endDate) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.nickname = nickname;
+        this.status = status;
+        this.password = password;
+        this.reportCount = reportCount;
+        this.grade = grade;
+        this.point = point;
+        this.endDate = endDate;
+    }
 }

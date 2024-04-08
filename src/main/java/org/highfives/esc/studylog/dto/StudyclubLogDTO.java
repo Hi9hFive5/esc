@@ -5,6 +5,7 @@ import lombok.Data;
 
 @Data
 public class StudyclubLogDTO {
+
     private int id;
 
     private String content;
