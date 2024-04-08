@@ -1,4 +1,4 @@
-package org.highfives.esc.studyclub.dto;
+package org.highfives.esc.studyclub.vo;
 
 import lombok.*;
 
@@ -7,23 +7,15 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-public class StudyclubDTO {
-
-    private int id;
-
-    private String deleteStatus;
+public class StudyclubVO {
 
     private String name;
 
     private String introduce;
 
-    private int memberCount;
-
     private int memberLimit;
 
     private String endDate;
-
-    private int leaderId;
 
     private int studyId;
 
