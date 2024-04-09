@@ -41,14 +41,7 @@ public class UserController {
         return ResponseEntity.ok().body(userDTOList);
     }
 
-//    /* 설명. 회원이 속한 스터디 클럽 조회*/
-//    @GetMapping("/studyclub")
-//    public ResponseEntity<List<UserDTO>> findStudyClubById(@PathVariable("id") String id) {
-//
-//        List<UserDTO> userDTOList = userService.findStudyClubById(id);
-//
-//        return ResponseEntity.ok().body(userDTOList);
-//    }
+
 
     /* 설명. 회원 정지 기능 */
 

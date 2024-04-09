@@ -7,6 +7,7 @@ import org.highfives.esc.User.entity.User;
 import org.highfives.esc.User.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -24,6 +25,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public UserDTO findUserById(String id) {
         User user = userRepo.findById(Integer.valueOf(id)).orElseThrow(IllegalArgumentException::new);
 
@@ -31,22 +33,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public List<UserDTO> findUserList() {
 
         List<User> userList = userRepo.findAll();
         return userMapper.userListToUserListDTO(userList);
     }
 
-//    @Override
-//    public List<UserDTO> findStudyClubById(String id) {
-//
-//        userRepo.findAllById(id);
-//
-//        return null;     // 필기. 수정하기.
-//    }
-
-
     @Override
+    @Transactional
     public UserDTO banUserById(UserDTO banUser) {
         User userInfo = userRepo.findById(banUser.getId()).orElseThrow(IllegalArgumentException::new);
 
@@ -69,6 +64,7 @@ public class UserServiceImpl implements UserService {
         return userDTO;
     }
     @Override
+    @Transactional
     public UserDTO updateUserInfoById(UserDTO updateUser) {
         UserDTO userDTO = UserDTO.builder()
                 .id(updateUser.getId())
@@ -83,7 +79,7 @@ public class UserServiceImpl implements UserService {
                 .status(updateUser.getStatus())
                 .build();
 
-        log.info("userDTO={}",userDTO);
+//        log.info("userDTO={}",userDTO);
 
         userRepo.save(userMapper.userDTOToUser(userDTO));
 
