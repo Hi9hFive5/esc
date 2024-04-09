@@ -23,6 +23,5 @@ class MemberScheduleServiceTest {
         System.out.println(memberScheduleDTO);
 
         assertEquals(memberScheduleDTO.getId(), id);
-        assertEquals(memberScheduleDTO.getId(), id);
     }
 }
