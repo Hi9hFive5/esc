@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.time.LocalDateTime;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -21,14 +23,14 @@ public class MemberSchedule {
     private int id;
 
     @Column(name = "selected_start_datetime")
-    private String startDatetime;
+    private LocalDateTime startDatetime;
 
     @Column(name = "selected_end_datetime")
-    private String endDatetime;
+    private LocalDateTime endDatetime;
 
     @Column(name = "member_id")
-    private String memberId;
+    private int memberId;
 
     @Column(name = "studyclub_id")
-    private String studyclubId;
+    private int studyclubId;
 }

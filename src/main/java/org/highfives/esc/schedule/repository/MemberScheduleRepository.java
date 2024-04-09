@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MemberScheduleRepository extends JpaRepository<MemberSchedule,Integer> {
+    MemberSchedule findById(int id);
 }

@@ -11,8 +11,8 @@ import java.time.LocalDateTime;
 @ToString
 public class MemberScheduleDTO {
     private int id;                                 // 멤버 일정 시간 id
-    private LocalDateTime selected_start_datetime;  // 선택한 일정 시작 시간
-    private LocalDateTime selected_end_datetime;    // 선택한 일정 종료 시간
-    private int member_id;                          // 해당 멤버
-    private int studyclub_id;                       // 해당 스터디클럽
+    private LocalDateTime startDatetime;  // 선택한 일정 시작 시간
+    private LocalDateTime endDatetime;    // 선택한 일정 종료 시간
+    private int memberId;                          // 해당 멤버
+    private int studyclubId;                       // 해당 스터디클럽
 }
