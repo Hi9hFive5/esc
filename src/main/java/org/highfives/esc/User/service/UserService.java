@@ -21,4 +21,5 @@ public interface UserService {
 
     UserDTO getUserPoint(UserDTO userDTOdata);
 
+    UserDTO userWithdrawalById(UserDTO userDTOData);
 }

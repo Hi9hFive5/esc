@@ -79,10 +79,20 @@ public class UserController {
 
     /* 설명. 회원의 포인트 변경 업데이트 */
     @PutMapping("/getUserPoint")
-    public ResponseEntity<UserDTO> getUserPoint(@RequestBody UserDTO userDTOdata){
+    public ResponseEntity<UserDTO> getUserPoint(@RequestBody UserDTO userDTOData){
 
-        UserDTO userDTO = userService.getUserPoint(userDTOdata);
+        UserDTO userDTO = userService.getUserPoint(userDTOData);
 
         return ResponseEntity.ok().body(userDTO);
     }
+
+    @PutMapping("/Withdrawal/{id}")
+    public ResponseEntity<UserDTO> userWithdrawalById(UserDTO userDTOData) {
+
+        UserDTO userDTO = userService.userWithdrawalById(userDTOData);
+
+        return ResponseEntity.ok().body(userDTO);
+
+    }
+
 }

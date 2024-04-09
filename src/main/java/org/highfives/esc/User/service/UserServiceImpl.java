@@ -145,4 +145,27 @@ public class UserServiceImpl implements UserService {
 
         return userDTO;
     }
+
+    @Override
+    public UserDTO userWithdrawalById(UserDTO userDTOData) {
+        User userInfo = userRepo.findById(userDTOData.getId()).orElseThrow(IllegalArgumentException::new);
+
+        UserDTO userDTO = UserDTO.builder()
+                .id(userInfo.getId())
+                .name(userInfo.getName())
+                .grade(userInfo.getGrade() )
+                .point(userInfo.getPoint())
+                .password(userInfo.getPassword())
+                .email(userInfo.getEmail())
+                .nickname(userInfo.getNickname())
+                .end_date(userInfo.getEndDate())
+                .report_count(userInfo.getReportCount())
+                .status(userDTOData.getStatus())
+                .build();
+        userRepo.save(userMapper.userDTOToUser(userDTO));
+
+        return userDTO;
+    }
+
+
 }

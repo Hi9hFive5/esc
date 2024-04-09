@@ -1,8 +1,12 @@
 package org.highfives.esc.User.controller;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
+@SpringBootTest
 class UserControllerTests {
+
+    
 
     @Test
     void findUserById() {
@@ -22,5 +26,9 @@ class UserControllerTests {
 
     @Test
     void findJoinStudyClubById() {
+    }
+
+    @Test
+    void getUserPoint() {
     }
 }
