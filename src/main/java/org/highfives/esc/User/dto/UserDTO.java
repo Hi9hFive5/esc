@@ -2,7 +2,6 @@ package org.highfives.esc.User.dto;
 
 
 import lombok.*;
-import org.highfives.esc.User.type.enums.UserStatus;
 
 @Getter
 @NoArgsConstructor

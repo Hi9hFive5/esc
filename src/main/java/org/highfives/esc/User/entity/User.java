@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.highfives.esc.User.type.enums.UserStatus;
 
 import java.util.Date;
 

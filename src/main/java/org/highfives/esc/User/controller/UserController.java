@@ -1,6 +1,8 @@
 package org.highfives.esc.User.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.highfives.esc.User.dao.UserMapper;
+import org.highfives.esc.User.dto.StudyclubMemberDTO;
 import org.highfives.esc.User.dto.UserDTO;
 import org.highfives.esc.User.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/user")
+@Slf4j
 public class UserController {
 
     private final UserService userService;
@@ -59,6 +62,26 @@ public class UserController {
     public ResponseEntity<UserDTO> updateUserInfoById(@RequestBody UserDTO updateUser){
 
         UserDTO userDTO = userService.updateUserInfoById(updateUser);
+
+        return ResponseEntity.ok().body(userDTO);
+    }
+
+    /* 설명. 회원이 참여한 스터디 클럽 조회 */
+
+    @GetMapping("/joinStudyClub/{member_id}")
+    public ResponseEntity<List<StudyclubMemberDTO>> findJoinStudyClubById(@PathVariable("member_id") String id ){
+
+        List <StudyclubMemberDTO> studyclubMemberDTO = userService.findJoinStudyClubById(id);
+
+
+        return ResponseEntity.ok().body(studyclubMemberDTO);
+    }
+
+    /* 설명. 회원의 포인트 변경 업데이트 */
+    @PutMapping("/getUserPoint")
+    public ResponseEntity<UserDTO> getUserPoint(@RequestBody UserDTO userDTOdata){
+
+        UserDTO userDTO = userService.getUserPoint(userDTOdata);
 
         return ResponseEntity.ok().body(userDTO);
     }

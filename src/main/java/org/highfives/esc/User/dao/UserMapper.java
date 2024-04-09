@@ -1,6 +1,8 @@
 package org.highfives.esc.User.dao;
 
+import org.highfives.esc.User.dto.StudyclubMemberDTO;
 import org.highfives.esc.User.dto.UserDTO;
+import org.highfives.esc.User.entity.StudyclubMember;
 import org.highfives.esc.User.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -16,11 +18,10 @@ public interface UserMapper {
     @Mapping(target = "id", source = "id")
     UserDTO userToUserDTO(User user);
 
-
-
-
     @Mapping(target = "id", source = "id")
     List<UserDTO> userListToUserListDTO(List<User> userList);
 
     User userDTOToUser(UserDTO userDTO);
+
+    List<StudyclubMemberDTO> studyclubMemberToStudyclubMemberDTO(List<StudyclubMember> studyclubMembers);
 }
