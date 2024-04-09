@@ -19,9 +19,9 @@ public class ChatController {
         this.chatService = chatService;
     }
 
-    /* /receive 로 받아서 후처리를 할 수 있다. (MVC구조로 DB에 저장하는 부분이 여기?)  */
+    /* /pub/~ 받아서 후처리를 할 수 있다. (MVC구조로 DB에 저장하는 부분이 여기?)  */
     @MessageMapping("/message")
-    @SendTo("/topic/message")
+    @SendTo("/sub/message")
     public ResponseEntity<ChatResultVO> getMessageHandler() {
 
 
@@ -29,7 +29,7 @@ public class ChatController {
         return null;
     }
 
-    @SendTo("/send")        // WebsocketConfig - SimpleMessageBroker
+    @SendTo("/sub")        // WebsocketConfig - SimpleMessageBroker
     public void sendMEssageHandler() {
 
     }

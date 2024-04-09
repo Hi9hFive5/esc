@@ -12,15 +12,15 @@ import java.util.UUID;
 @Getter
 @Setter
 @ToString
-public class ChatRoom {
+public class ChatRoomDTO {
 
     private String roomId; // 채팅방 아이디
     private String roomName; // 채팅방 이름
     private long userCount; // 채팅방 인원수
     private HashMap<String, String> userlist = new HashMap<String, String>();
 
-    public ChatRoom create(String roomName){
-        ChatRoom chatRoom = new ChatRoom();
+    public ChatRoomDTO create(String roomName){
+        ChatRoomDTO chatRoom = new ChatRoomDTO();
         chatRoom.roomId = UUID.randomUUID().toString(); // 채팅방 ID 무작위 생성
         chatRoom.roomName = roomName;                   // 입력한 채팅방 이름
 
