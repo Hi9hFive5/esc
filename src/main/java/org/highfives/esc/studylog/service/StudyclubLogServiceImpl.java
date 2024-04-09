@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.highfives.esc.studylog.dao.StudyclubLogMapper;
 import org.highfives.esc.studylog.dto.StudyclubLogDTO;
 import org.highfives.esc.studylog.entity.StudyclubLog;
-import org.highfives.esc.studylog.repository.StudyclubLogRepo;
+import org.highfives.esc.studylog.repository.StudyclubLogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,12 +13,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class StudyclubLogServiceImpl implements StudyclubLogService {
 
-    private final StudyclubLogRepo studyclubLogRepo;
+    private final StudyclubLogRepository studyclubLogRepository;
     private final StudyclubLogMapper studyclubLogMapper;
 
     @Autowired
-    public StudyclubLogServiceImpl(StudyclubLogRepo studyclubLogRepo, StudyclubLogMapper studyclubLogMapper) {
-        this.studyclubLogRepo = studyclubLogRepo;
+    public StudyclubLogServiceImpl(StudyclubLogRepository studyclubLogRepository, StudyclubLogMapper studyclubLogMapper) {
+        this.studyclubLogRepository = studyclubLogRepository;
         this.studyclubLogMapper = studyclubLogMapper;
     }
 
@@ -29,9 +29,9 @@ public class StudyclubLogServiceImpl implements StudyclubLogService {
 
         StudyclubLog studyclubLog = studyclubLogMapper.studyclubLogDTOTostudyclubLog(studyclubLogDTOData);
 
-        studyclubLogRepo.save(studyclubLog);
+        studyclubLogRepository.save(studyclubLog);
 
-        log.info("studyclubLog={}", studyclubLog);
+//        log.info("studyclubLog={}", studyclubLog);
 
         return studyclubLogDTOData;
     }
@@ -49,7 +49,7 @@ public class StudyclubLogServiceImpl implements StudyclubLogService {
                 .scheduleId(studyclubLogDTOData.getScheduleId())
                 .build();
 
-        studyclubLogRepo.save(studyclubLogMapper.studyclubLogDTOTostudyclubLog(studyclubLogDTO));
+        studyclubLogRepository.save(studyclubLogMapper.studyclubLogDTOTostudyclubLog(studyclubLogDTO));
 
         return studyclubLogDTO;
     }
@@ -58,6 +58,6 @@ public class StudyclubLogServiceImpl implements StudyclubLogService {
     @Transactional
     public void deleteStudyLog(String id) {
 
-        studyclubLogRepo.deleteById(Integer.valueOf(id));
+        studyclubLogRepository.deleteById(Integer.valueOf(id));
     }
 }

@@ -6,7 +6,7 @@ import org.highfives.esc.User.dto.StudyclubMemberDTO;
 import org.highfives.esc.User.dto.UserDTO;
 import org.highfives.esc.User.entity.StudyclubMember;
 import org.highfives.esc.User.entity.User;
-import org.highfives.esc.User.repository.UserRepo;
+import org.highfives.esc.User.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,19 +17,19 @@ import java.util.List;
 @Slf4j
 public class UserServiceImpl implements UserService {
 
-    private final UserRepo userRepo;
+    private final UserRepository userRepository;
     private final UserMapper userMapper;
 
     @Autowired
-    public UserServiceImpl(UserRepo userRepo, UserMapper userMapper) {
-        this.userRepo = userRepo;
+    public UserServiceImpl(UserRepository userRepository, UserMapper userMapper) {
+        this.userRepository = userRepository;
         this.userMapper = userMapper;
     }
 
     @Override
     @Transactional
     public UserDTO findUserById(String id) {
-        User user = userRepo.findById(Integer.valueOf(id)).orElseThrow(IllegalArgumentException::new);
+        User user = userRepository.findById(Integer.valueOf(id)).orElseThrow(IllegalArgumentException::new);
 
         return userMapper.userToUserDTO(user);
     }
@@ -38,14 +38,14 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public List<UserDTO> findUserList() {
 
-        List<User> userList = userRepo.findAll();
+        List<User> userList = userRepository.findAll();
         return userMapper.userListToUserListDTO(userList);
     }
 
     @Override
     @Transactional
     public UserDTO banUserById(UserDTO banUser) {
-        User userInfo = userRepo.findById(banUser.getId()).orElseThrow(IllegalArgumentException::new);
+        User userInfo = userRepository.findById(banUser.getId()).orElseThrow(IllegalArgumentException::new);
 
         UserDTO userDTO = UserDTO.builder()
                 .id(banUser.getId())
@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
                 .status(banUser.getStatus())
                 .build();
 
-        userRepo.save(userMapper.userDTOToUser(userDTO));
+        userRepository.save(userMapper.userDTOToUser(userDTO));
 
 
         return userDTO;
@@ -83,7 +83,7 @@ public class UserServiceImpl implements UserService {
 
 //        log.info("userDTO={}",userDTO);
 
-        userRepo.save(userMapper.userDTOToUser(userDTO));
+        userRepository.save(userMapper.userDTOToUser(userDTO));
 
 
         return userDTO;
@@ -92,7 +92,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<StudyclubMemberDTO> findJoinStudyClubById(String id) {
-        List<StudyclubMember> studyclubMembers = userRepo.findJoinStudyClubById(id);
+        List<StudyclubMember> studyclubMembers = userRepository.findJoinStudyClubById(id);
 
         List <StudyclubMemberDTO> studyclubMemberDTO = userMapper.studyclubMemberToStudyclubMemberDTO(studyclubMembers);
 
@@ -101,7 +101,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO getUserPoint(UserDTO userDTOdata) {
-        User userInfo = userRepo.findById(userDTOdata.getId()).orElseThrow(IllegalArgumentException::new);
+        User userInfo = userRepository.findById(userDTOdata.getId()).orElseThrow(IllegalArgumentException::new);
 
 
 
@@ -136,19 +136,19 @@ public class UserServiceImpl implements UserService {
                     .status(userDTO.getStatus())
                     .build();
 
-            userRepo.save(userMapper.userDTOToUser(userGrade));
+            userRepository.save(userMapper.userDTOToUser(userGrade));
 
             return userGrade;
         }
 
-        userRepo.save(userMapper.userDTOToUser(userDTO));
+        userRepository.save(userMapper.userDTOToUser(userDTO));
 
         return userDTO;
     }
 
     @Override
     public UserDTO userWithdrawalById(UserDTO userDTOData) {
-        User userInfo = userRepo.findById(userDTOData.getId()).orElseThrow(IllegalArgumentException::new);
+        User userInfo = userRepository.findById(userDTOData.getId()).orElseThrow(IllegalArgumentException::new);
 
         UserDTO userDTO = UserDTO.builder()
                 .id(userInfo.getId())
@@ -162,10 +162,18 @@ public class UserServiceImpl implements UserService {
                 .report_count(userInfo.getReportCount())
                 .status(userDTOData.getStatus())
                 .build();
-        userRepo.save(userMapper.userDTOToUser(userDTO));
+        userRepository.save(userMapper.userDTOToUser(userDTO));
 
         return userDTO;
     }
 
+    @Override
+    public UserDTO signUp(UserDTO userDTOData) {
 
+        User user = userMapper.userDTOToUser(userDTOData);
+
+        userRepository.save(user);
+
+        return userDTOData;
+    }
 }
