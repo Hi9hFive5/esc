@@ -13,7 +13,7 @@ public class ChatRoomController {
 
     private final ChatRoomService chatRoomService;
 
-    // 채팅방 리스트 가져오기
+    // 채팅방 리스트 가져오기 - 1:1 채팅일건데 채팅방 리스트는 필요 없는거 아닌지?
 
 
     // 채팅

@@ -10,9 +10,8 @@ import lombok.*;
 public class ChatMessageDTO {
 
     private MessageType type;       // 유저 상태 ( 입장 , 채팅, 퇴장 )
-    private String roomID;          // 채팅방 ID
     private String sender;          // 채팅치는 사람 ID
-    private String message;         // 채팅 메시지
+    private String content;         // 채팅 메시지
     private String writeTime;       // 채팅 작성 시간
 
 }
