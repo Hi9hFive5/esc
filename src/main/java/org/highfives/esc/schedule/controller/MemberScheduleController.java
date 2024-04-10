@@ -61,4 +61,24 @@ public class MemberScheduleController {
 
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
+
+    /* 설명. member id로 조회 */
+    @GetMapping("studyclub/{studyclubId}")
+    public ResponseEntity<ResponseMemberScheduleListVO> findMemberScheduleByStudyclubId(
+            @PathVariable("studyclubId") int studyclubId) {
+
+        ResponseMemberScheduleListVO response = new ResponseMemberScheduleListVO();
+
+        ArrayList<MemberScheduleDTO> memberScheduleDTOList = memberScheduleService.findMemberScheduleByStudyclubId(studyclubId);
+        ArrayList<ResponseMemberScheduleVO> responseMemberScheduleVOList = new ArrayList<>();
+
+        for (MemberScheduleDTO memberScheduleDTO: memberScheduleDTOList){
+            responseMemberScheduleVOList.add(mapper.map(memberScheduleDTO, ResponseMemberScheduleVO.class));
+        }
+
+        response.setMessage("조회 성공");
+        response.setMemberSchedules(responseMemberScheduleVOList);
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
 }

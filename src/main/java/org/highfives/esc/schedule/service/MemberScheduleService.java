@@ -49,4 +49,17 @@ public class MemberScheduleService {
 
         return memberScheduleDTOList;
     }
+
+    public ArrayList<MemberScheduleDTO> findMemberScheduleByStudyclubId(int studyclueId) {
+        mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+
+        ArrayList<MemberSchedule> memberScheduleList = memberScheduleRepository.findByStudyclubId(studyclueId);
+        ArrayList<MemberScheduleDTO> memberScheduleDTOList = new ArrayList<>();
+
+        for (MemberSchedule memberSchedule: memberScheduleList) {
+            memberScheduleDTOList.add(mapper.map(memberSchedule, MemberScheduleDTO.class));
+        }
+
+        return memberScheduleDTOList;
+    }
 }

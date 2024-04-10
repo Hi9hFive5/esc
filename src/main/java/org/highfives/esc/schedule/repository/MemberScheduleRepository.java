@@ -12,4 +12,6 @@ public interface MemberScheduleRepository extends JpaRepository<MemberSchedule,I
     MemberSchedule findById(int id);
 
     ArrayList<MemberSchedule> findByMemberId(int memberId);
+
+    ArrayList<MemberSchedule> findByStudyclubId(int studyclueId);
 }

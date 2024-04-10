@@ -37,4 +37,15 @@ class MemberScheduleServiceTest {
 
         assertNotNull(memberScheduleDTOList);
     }
+
+    @Test
+    @DisplayName("스터디클럽id로 멤버 일정 조회")
+    void findMemberScheduleByStudyclubIdTest() {
+        int studyclubId = 1;
+
+        ArrayList<MemberScheduleDTO> memberScheduleDTOList = memberScheduleService.findMemberScheduleByStudyclubId(studyclubId);
+        System.out.println(memberScheduleDTOList);
+
+        assertNotNull(memberScheduleDTOList);
+    }
 }
