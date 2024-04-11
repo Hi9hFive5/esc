@@ -1,5 +1,6 @@
 package org.highfives.esc.studyclub.controller;
 
+import org.highfives.esc.studyclub.dto.StudyCategoryDTO;
 import org.highfives.esc.studyclub.dto.StudyclubDTO;
 import org.highfives.esc.studyclub.service.StudyclubService;
 import org.highfives.esc.studyclub.vo.StudyclubVO;
@@ -61,5 +62,21 @@ public class StudyclubController {
         StudyclubDTO studyclub = studyclubService.deleteStudyclub(studyclubId);
 
         return ResponseEntity.ok().body(studyclub);
+    }
+
+    @GetMapping("/category")
+    public ResponseEntity<List<StudyCategoryDTO>> findAllStudyCategoryById() {
+
+        List<StudyCategoryDTO> studyCategoryList = studyclubService.findAllStudyCategory();
+
+        return ResponseEntity.ok().body(studyCategoryList);
+    }
+
+    @GetMapping("/category/{categoryId}")
+    public ResponseEntity<StudyCategoryDTO> findStudyCategoryNameById(@PathVariable int categoryId) {
+
+        StudyCategoryDTO studyCategory= studyclubService.findCategoryNameById(categoryId);
+
+        return ResponseEntity.ok().body(studyCategory);
     }
 }
