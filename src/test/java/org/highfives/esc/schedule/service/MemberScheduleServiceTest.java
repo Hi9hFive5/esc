@@ -5,7 +5,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -47,5 +50,25 @@ class MemberScheduleServiceTest {
         System.out.println(memberScheduleDTOList);
 
         assertNotNull(memberScheduleDTOList);
+    }
+
+    @Test
+    @DisplayName("일정 추가")
+//    @Transactional
+    void saveMemberSchedule() {
+
+        String startTime = "2024-04-09 08:30:00";
+        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime start = LocalDateTime.parse(startTime, formatter1);
+
+        String endTime = "2024-04-09 10:30:00";
+        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime end = LocalDateTime.parse(endTime, formatter2);
+
+        MemberScheduleDTO memberScheduleDTO = new MemberScheduleDTO(start, end, 3, 1);
+
+        memberScheduleService.saveMemberSchedule(memberScheduleDTO);
+
+        assertNotNull(memberScheduleService.findMemberScheduleByMemberId(3));
     }
 }

@@ -15,4 +15,11 @@ public class MemberScheduleDTO {
     private LocalDateTime endDatetime;    // 선택한 일정 종료 시간
     private int memberId;                          // 해당 멤버
     private int studyclubId;                       // 해당 스터디클럽
+
+    public MemberScheduleDTO(LocalDateTime startDatetime, LocalDateTime endDatetime, int memberId, int studyclubId) {
+        this.startDatetime = startDatetime;
+        this.endDatetime = endDatetime;
+        this.memberId = memberId;
+        this.studyclubId = studyclubId;
+    }
 }

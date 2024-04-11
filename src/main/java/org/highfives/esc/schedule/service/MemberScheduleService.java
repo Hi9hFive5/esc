@@ -10,6 +10,7 @@ import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,5 +62,17 @@ public class MemberScheduleService {
         }
 
         return memberScheduleDTOList;
+    }
+
+    public void saveMemberSchedule(MemberScheduleDTO memberScheduleDTO) {
+        mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+
+        MemberSchedule memberSchedule = new MemberSchedule();
+        memberSchedule.setStartDatetime(memberScheduleDTO.getStartDatetime());
+        memberSchedule.setEndDatetime(memberScheduleDTO.getEndDatetime());
+        memberSchedule.setMemberId(memberScheduleDTO.getMemberId());
+        memberSchedule.setStudyclubId(memberScheduleDTO.getStudyclubId());
+
+        memberScheduleRepository.save(memberSchedule);
     }
 }

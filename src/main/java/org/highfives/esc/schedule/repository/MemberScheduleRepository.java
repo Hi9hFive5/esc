@@ -1,9 +1,11 @@
 package org.highfives.esc.schedule.repository;
 
+import org.highfives.esc.schedule.dto.MemberScheduleDTO;
 import org.highfives.esc.schedule.entity.MemberSchedule;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 

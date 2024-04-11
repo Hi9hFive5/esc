@@ -2,17 +2,18 @@ package org.highfives.esc.schedule.controller;
 
 import org.highfives.esc.schedule.dto.MemberScheduleDTO;
 import org.highfives.esc.schedule.service.MemberScheduleService;
+import org.highfives.esc.schedule.vo.RequestMemberScheduleListVO;
+import org.highfives.esc.schedule.vo.RequestMemberScheduleVO;
 import org.highfives.esc.schedule.vo.ResponseMemberScheduleListVO;
 import org.highfives.esc.schedule.vo.ResponseMemberScheduleVO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 @RestController
@@ -82,5 +83,31 @@ public class MemberScheduleController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    /* 설명. 일정 추가 */
+    @PostMapping("save")
+    public ResponseEntity<ResponseMemberScheduleVO> saveMemberSchedule(
+            @RequestBody RequestMemberScheduleVO requestMemberScheduleVO){
+        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime startDatetime = LocalDateTime.parse(requestMemberScheduleVO.getStart(), formatter1);
 
+        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime endDatetime = LocalDateTime.parse(requestMemberScheduleVO.getEnd(), formatter2);
+
+        MemberScheduleDTO memberScheduleDTO = new MemberScheduleDTO();
+        memberScheduleDTO.setStartDatetime(startDatetime);
+        memberScheduleDTO.setEndDatetime(endDatetime);
+        memberScheduleDTO.setMemberId(requestMemberScheduleVO.getMemberId());
+        memberScheduleDTO.setStudyclubId(requestMemberScheduleVO.getStudyclubId());
+
+        memberScheduleService.saveMemberSchedule(memberScheduleDTO);
+
+        ResponseMemberScheduleVO response = new ResponseMemberScheduleVO();
+        response.setMessage("저장 성공");
+        response.setStartDatetime(memberScheduleDTO.getStartDatetime());
+        response.setEndDatetime(memberScheduleDTO.getEndDatetime());
+        response.setMemberId(memberScheduleDTO.getMemberId());
+        response.setStudyclubId(memberScheduleDTO.getStudyclubId());
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
 }
