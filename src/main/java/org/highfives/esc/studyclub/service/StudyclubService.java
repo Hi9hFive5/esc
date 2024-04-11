@@ -1,7 +1,10 @@
 package org.highfives.esc.studyclub.service;
 
+import org.highfives.esc.studyclub.dto.StudyCategoryDTO;
 import org.highfives.esc.studyclub.dto.StudyclubDTO;
+import org.highfives.esc.studyclub.entity.StudyCategory;
 import org.highfives.esc.studyclub.entity.Studyclub;
+import org.highfives.esc.studyclub.repository.StudyCategoryRepo;
 import org.highfives.esc.studyclub.repository.StudyclubRepo;
 import org.highfives.esc.studyclub.vo.StudyclubVO;
 import org.modelmapper.ModelMapper;
@@ -17,11 +20,13 @@ public class StudyclubService {
 
     private final ModelMapper mapper;
     private final StudyclubRepo studyclubRepo;
+    private final StudyCategoryRepo studyCategoryRepo;
 
     @Autowired
-    public StudyclubService(ModelMapper mapper, StudyclubRepo studyclubRepo) {
+    public StudyclubService(ModelMapper mapper, StudyclubRepo studyclubRepo, StudyCategoryRepo studyCategoryRepo) {
         this.mapper = mapper;
         this.studyclubRepo = studyclubRepo;
+        this.studyCategoryRepo = studyCategoryRepo;
     }
 
     @Transactional(readOnly = true)
@@ -85,5 +90,24 @@ public class StudyclubService {
         studyclub.setDeleteStatus("Y");
 
         return mapper.map(studyclub, StudyclubDTO.class);
+    }
+
+    public StudyCategoryDTO findCategoryNameById(int categoryId) {
+
+        StudyCategory studyCategory = studyCategoryRepo.findById(categoryId).orElseThrow(IllegalArgumentException::new);
+
+        return mapper.map(studyCategory, StudyCategoryDTO.class);
+    }
+
+    public List<StudyCategoryDTO> findAllStudyCategory() {
+
+        List<StudyCategory> studyCategoryList = studyCategoryRepo.findAll();
+        List<StudyCategoryDTO> studyCategoryDTOList = new ArrayList<>();
+
+        for (StudyCategory studyCategory : studyCategoryList) {
+            studyCategoryDTOList.add(mapper.map(studyCategory, StudyCategoryDTO.class));
+        }
+
+        return studyCategoryDTOList;
     }
 }
