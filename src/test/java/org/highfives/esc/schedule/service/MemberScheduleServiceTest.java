@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
@@ -74,7 +75,7 @@ class MemberScheduleServiceTest {
 
     @Test
     @DisplayName("일정 수정")
-//    @Transactional
+    @Transactional
     void modifyMemberSchedule() {
         String startTime = "2024-04-09 17:30:00";
         DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -84,10 +85,21 @@ class MemberScheduleServiceTest {
         DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime end = LocalDateTime.parse(endTime, formatter2);
 
-        MemberScheduleDTO memberScheduleDTO = new MemberScheduleDTO(22, start, end);
+        MemberScheduleDTO memberScheduleDTO = new MemberScheduleDTO(14, start, end);
 
         memberScheduleService.modifyMemberSchedule(memberScheduleDTO);
 
-        assertEquals(start, memberScheduleService.findMemberScheduleById(22).getStartDatetime());
+        assertEquals(start, memberScheduleService.findMemberScheduleById(14).getStartDatetime());
+    }
+
+    @Test
+    @DisplayName("일정 삭제")
+    @Transactional
+    void removeMemberSchedule() {
+        int id = 14;
+
+        memberScheduleService.removeMemberSchedule(id);
+
+        assertNull(memberScheduleService.findMemberScheduleById(id));
     }
 }

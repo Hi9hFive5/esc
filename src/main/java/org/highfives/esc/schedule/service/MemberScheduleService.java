@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -28,14 +29,16 @@ public class MemberScheduleService {
 
     public MemberScheduleDTO findMemberScheduleById(int id) {
         mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-        System.out.println(id);
+
         MemberSchedule memberSchedule = memberScheduleRepository.findById(id);
-        System.out.println(memberSchedule);
+        if (memberSchedule != null) {
+            MemberScheduleDTO memberScheduleDTO = mapper.map(memberSchedule, MemberScheduleDTO.class);
+            System.out.println(memberScheduleDTO);
 
-        MemberScheduleDTO memberScheduleDTO = mapper.map(memberSchedule, MemberScheduleDTO.class);
-        System.out.println(memberScheduleDTO);
-
-        return memberScheduleDTO;
+            return memberScheduleDTO;
+        } else {
+            return null;
+        }
     }
 
     public ArrayList<MemberScheduleDTO> findMemberScheduleByMemberId(int memberId) {
@@ -64,6 +67,7 @@ public class MemberScheduleService {
         return memberScheduleDTOList;
     }
 
+    @Transactional
     public void saveMemberSchedule(MemberScheduleDTO memberScheduleDTO) {
         mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 
@@ -76,13 +80,21 @@ public class MemberScheduleService {
         memberScheduleRepository.save(memberSchedule);
     }
 
+    @Transactional
     public void modifyMemberSchedule(MemberScheduleDTO memberScheduleDTO) {
         mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 
         // 설명. id로 변경할 일정 조회
         MemberSchedule memberSchedule = memberScheduleRepository.findById(memberScheduleDTO.getId());
 
+        // 설명. 일정 시간 변경
         memberSchedule.setStartDatetime(memberScheduleDTO.getStartDatetime());
         memberSchedule.setEndDatetime(memberScheduleDTO.getEndDatetime());
+    }
+
+    @Transactional
+    public void removeMemberSchedule(int id) {
+
+        memberScheduleRepository.deleteById(id);
     }
 }

@@ -7,6 +7,7 @@ import org.highfives.esc.schedule.vo.RequestMemberScheduleVO;
 import org.highfives.esc.schedule.vo.ResponseMemberScheduleListVO;
 import org.highfives.esc.schedule.vo.ResponseMemberScheduleVO;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.internal.bytebuddy.description.ByteCodeElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -86,7 +87,6 @@ public class MemberScheduleController {
 
 
     /* 설명. 일정 추가 */
-    @Transactional
     @PostMapping("save")
     public ResponseEntity<ResponseMemberScheduleVO> saveMemberSchedule(
             @RequestBody RequestMemberScheduleVO requestMemberScheduleVO){
@@ -116,7 +116,6 @@ public class MemberScheduleController {
 
 
     /* 설명. 일정 수정 */
-    @Transactional
     @PutMapping("modify")
     public ResponseEntity<ResponseMemberScheduleVO> modifyMemberSchedule(
             @RequestBody RequestMemberScheduleVO requestMemberScheduleVO) {
@@ -139,6 +138,26 @@ public class MemberScheduleController {
         response.setId(memberScheduleDTO.getId());
         response.setStartDatetime(memberScheduleDTO.getStartDatetime());
         response.setEndDatetime(memberScheduleDTO.getEndDatetime());
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    // 설명. 일정 삭제
+    @DeleteMapping("remove/{id}")
+    public ResponseEntity<ResponseMemberScheduleVO> removeMemberSchedule(
+            @PathVariable("id") int id) {
+
+        ResponseMemberScheduleVO response = new ResponseMemberScheduleVO();
+        MemberScheduleDTO memberScheduleDTO = memberScheduleService.findMemberScheduleById(id);
+
+        memberScheduleService.removeMemberSchedule(id);
+
+        response.setMessage("삭제 성공");
+        response.setId(memberScheduleDTO.getId());
+        response.setStartDatetime(memberScheduleDTO.getStartDatetime());
+        response.setEndDatetime(memberScheduleDTO.getEndDatetime());
+        response.setMemberId(memberScheduleDTO.getMemberId());
+        response.setStudyclubId(memberScheduleDTO.getStudyclubId());
 
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
