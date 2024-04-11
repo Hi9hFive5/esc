@@ -75,4 +75,14 @@ public class MemberScheduleService {
 
         memberScheduleRepository.save(memberSchedule);
     }
+
+    public void modifyMemberSchedule(MemberScheduleDTO memberScheduleDTO) {
+        mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+
+        // 설명. id로 변경할 일정 조회
+        MemberSchedule memberSchedule = memberScheduleRepository.findById(memberScheduleDTO.getId());
+
+        memberSchedule.setStartDatetime(memberScheduleDTO.getStartDatetime());
+        memberSchedule.setEndDatetime(memberScheduleDTO.getEndDatetime());
+    }
 }

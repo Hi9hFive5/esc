@@ -71,4 +71,23 @@ class MemberScheduleServiceTest {
 
         assertNotNull(memberScheduleService.findMemberScheduleByMemberId(3));
     }
+
+    @Test
+    @DisplayName("일정 수정")
+//    @Transactional
+    void modifyMemberSchedule() {
+        String startTime = "2024-04-09 17:30:00";
+        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime start = LocalDateTime.parse(startTime, formatter1);
+
+        String endTime = "2024-04-09 19:30:00";
+        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime end = LocalDateTime.parse(endTime, formatter2);
+
+        MemberScheduleDTO memberScheduleDTO = new MemberScheduleDTO(22, start, end);
+
+        memberScheduleService.modifyMemberSchedule(memberScheduleDTO);
+
+        assertEquals(start, memberScheduleService.findMemberScheduleById(22).getStartDatetime());
+    }
 }

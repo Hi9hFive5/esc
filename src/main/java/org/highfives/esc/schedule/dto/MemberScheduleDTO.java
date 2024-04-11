@@ -22,4 +22,10 @@ public class MemberScheduleDTO {
         this.memberId = memberId;
         this.studyclubId = studyclubId;
     }
+
+    public MemberScheduleDTO(int id, LocalDateTime startDatetime, LocalDateTime endDatetime) {
+        this.id = id;
+        this.startDatetime = startDatetime;
+        this.endDatetime = endDatetime;
+    }
 }

@@ -10,6 +10,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -83,7 +84,9 @@ public class MemberScheduleController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+
     /* 설명. 일정 추가 */
+    @Transactional
     @PostMapping("save")
     public ResponseEntity<ResponseMemberScheduleVO> saveMemberSchedule(
             @RequestBody RequestMemberScheduleVO requestMemberScheduleVO){
@@ -107,6 +110,35 @@ public class MemberScheduleController {
         response.setEndDatetime(memberScheduleDTO.getEndDatetime());
         response.setMemberId(memberScheduleDTO.getMemberId());
         response.setStudyclubId(memberScheduleDTO.getStudyclubId());
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+
+    /* 설명. 일정 수정 */
+    @Transactional
+    @PutMapping("modify")
+    public ResponseEntity<ResponseMemberScheduleVO> modifyMemberSchedule(
+            @RequestBody RequestMemberScheduleVO requestMemberScheduleVO) {
+
+        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime startDatetime = LocalDateTime.parse(requestMemberScheduleVO.getStart(), formatter1);
+
+        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime endDatetime = LocalDateTime.parse(requestMemberScheduleVO.getEnd(), formatter2);
+
+        MemberScheduleDTO memberScheduleDTO = new MemberScheduleDTO();
+        memberScheduleDTO.setId(requestMemberScheduleVO.getId());
+        memberScheduleDTO.setStartDatetime(startDatetime);
+        memberScheduleDTO.setEndDatetime(endDatetime);
+
+        memberScheduleService.modifyMemberSchedule(memberScheduleDTO);
+
+        ResponseMemberScheduleVO response = new ResponseMemberScheduleVO();
+        response.setMessage("저장 성공");
+        response.setId(memberScheduleDTO.getId());
+        response.setStartDatetime(memberScheduleDTO.getStartDatetime());
+        response.setEndDatetime(memberScheduleDTO.getEndDatetime());
 
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
