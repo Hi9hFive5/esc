@@ -32,11 +32,12 @@ class MemberScheduleServiceTest {
     }
 
     @Test
-    @DisplayName("멤버id로 멤버 일정 조회")
+    @DisplayName("스터디클럽id와 멤버id로 멤버 일정 조회")
     void findMemberScheduleByMemberIdTest() {
+        int studyclubId = 1;
         int memberId = 1;
 
-        ArrayList<MemberScheduleDTO> memberScheduleDTOList = memberScheduleService.findMemberScheduleByMemberId(memberId);
+        ArrayList<MemberScheduleDTO> memberScheduleDTOList = memberScheduleService.findMemberScheduleByStudyclubIdAndMemberId(studyclubId, memberId);
         System.out.println(memberScheduleDTOList);
 
         assertNotNull(memberScheduleDTOList);
@@ -70,7 +71,7 @@ class MemberScheduleServiceTest {
 
         memberScheduleService.saveMemberSchedule(memberScheduleDTO);
 
-        assertNotNull(memberScheduleService.findMemberScheduleByMemberId(3));
+        assertNotNull(memberScheduleService.findMemberScheduleByStudyclubIdAndMemberId(1, 3));
     }
 
     @Test
@@ -78,11 +79,11 @@ class MemberScheduleServiceTest {
     @Transactional
     void modifyMemberSchedule() {
         String startTime = "2024-04-09 17:30:00";
-        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("EEE MMM dd yyyy HH:mm:ss 'GMT'Z '('z')'");
         LocalDateTime start = LocalDateTime.parse(startTime, formatter1);
 
         String endTime = "2024-04-09 19:30:00";
-        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("EEE MMM dd yyyy HH:mm:ss 'GMT'Z '('z')'");
         LocalDateTime end = LocalDateTime.parse(endTime, formatter2);
 
         MemberScheduleDTO memberScheduleDTO = new MemberScheduleDTO(14, start, end);

@@ -45,14 +45,15 @@ public class MemberScheduleController {
         return ResponseEntity.status(HttpStatus.OK).body(responseMemberScheduleVO);
     }
 
-    /* 설명. member id로 조회 */
-    @GetMapping("member/{memberId}")
+    /* 설명. studyclub id와 member id로 조회 */
+    @GetMapping("member/{studyclubId}/{memberId}")
     public ResponseEntity<ResponseMemberScheduleListVO> findMemberScheduleByMemberId(
+            @PathVariable("studyclubId") int studyclubId,
             @PathVariable("memberId") int memberId) {
 
         ResponseMemberScheduleListVO response = new ResponseMemberScheduleListVO();
 
-        ArrayList<MemberScheduleDTO> memberScheduleDTOList = memberScheduleService.findMemberScheduleByMemberId(memberId);
+        ArrayList<MemberScheduleDTO> memberScheduleDTOList = memberScheduleService.findMemberScheduleByStudyclubIdAndMemberId(studyclubId, memberId);
         ArrayList<ResponseMemberScheduleVO> responseMemberScheduleVOList = new ArrayList<>();
 
         for (MemberScheduleDTO memberScheduleDTO: memberScheduleDTOList){
