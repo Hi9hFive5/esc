@@ -62,7 +62,7 @@ public class MemberScheduleController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    /* 설명. member id로 조회 */
+    /* 설명. studyclub id로 조회 */
     @GetMapping("studyclub/{studyclubId}")
     public ResponseEntity<ResponseMemberScheduleListVO> findMemberScheduleByStudyclubId(
             @PathVariable("studyclubId") int studyclubId) {
@@ -81,4 +81,6 @@ public class MemberScheduleController {
 
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
+
+
 }
