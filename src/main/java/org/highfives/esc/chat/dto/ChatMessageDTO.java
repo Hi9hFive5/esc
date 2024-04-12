@@ -14,4 +14,5 @@ public class ChatMessageDTO {
     private String content;         // 채팅 메시지
     private String writeTime;       // 채팅 작성 시간
 
+
 }

@@ -1,27 +1,29 @@
 package org.highfives.esc.chat.config;
 
+import org.highfives.esc.chat.controller.ChatHandler;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.messaging.simp.config.MessageBrokerRegistry;
-import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
-import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
-import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
+import org.springframework.web.socket.WebSocketHandler;
+import org.springframework.web.socket.config.annotation.EnableWebSocket;
+import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
+import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 
 @Configuration
-@EnableWebSocketMessageBroker
-public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
+@EnableWebSocket
+public class WebSocketConfig implements WebSocketConfigurer {
 
-    @Override
-    public void registerStompEndpoints(final StompEndpointRegistry registry) {
+    private final ChatHandler chatHandler;
 
-        /* 클라이언트에서 웹소켓에 접속할 수 있는 endpoint 경로 지정 */
-        registry.addEndpoint("/ws")  // ex) http://localhost:8080/ws  로 소켓연결요청
-                .setAllowedOrigins("*")          // CORS 설정(일단은 전부 통과되게)
-                .withSockJS();
+    @Autowired
+    public WebSocketConfig(ChatHandler chatHandler) {
+        this.chatHandler = chatHandler;
     }
 
     @Override
-    public void configureMessageBroker(final MessageBrokerRegistry registry) {
-        registry.setApplicationDestinationPrefixes("/pub")      // / /app으로 시작하는 메시지만 해당 브로커에서 받아서 처리한다.
-                .enableSimpleBroker("/sub");  // 해당 브로커를 구독하는 클라이언트에게 메세지를 보냄.
+    public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+
+        registry.addHandler(chatHandler, "").setAllowedOriginPatterns("*");
     }
+
 }
