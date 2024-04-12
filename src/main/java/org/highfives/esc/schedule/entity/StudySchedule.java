@@ -33,7 +33,7 @@ public class StudySchedule {
     @Column(name = "end_datetime")
     private LocalDateTime endDatetime;      // 일정 종료 시간
 
-    @Column(name = "use_state")
+    @Column(name = "use_status")
     private char useState;                  // 일정 삭제 여부
 
     @Column(name = "schedule_writer_id")
