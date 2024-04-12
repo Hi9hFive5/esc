@@ -1,4 +1,4 @@
-package org.highfives.esc.User.entity;
+package org.highfives.esc.user.entity;
 
 import jakarta.persistence.*;
 import lombok.Builder;

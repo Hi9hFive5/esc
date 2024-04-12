@@ -1,7 +1,8 @@
-package org.highfives.esc.User.service;
+package org.highfives.esc.user.service;
 
-import org.highfives.esc.User.dto.StudyclubMemberDTO;
-import org.highfives.esc.User.dto.UserDTO;
+import org.highfives.esc.user.dto.StudyclubInfoDTO;
+import org.highfives.esc.user.dto.UserDTO;
+import org.highfives.esc.user.dto.UserInfoDTO;
 
 import java.util.List;
 
@@ -17,11 +18,14 @@ public interface UserService {
 
     UserDTO updateUserInfoById(UserDTO updateUser);
 
-    List<StudyclubMemberDTO> findJoinStudyClubById(String id);
 
     UserDTO getUserPoint(UserDTO userDTOdata);
 
     UserDTO userWithdrawalById(UserDTO userDTOData);
 
     UserDTO signUp(UserDTO userDTOData);
+
+    List<UserInfoDTO> findJoinMemberAndNameById(String studyclubId);
+
+    List<StudyclubInfoDTO> findJoinStudyClubById(String memberId);
 }

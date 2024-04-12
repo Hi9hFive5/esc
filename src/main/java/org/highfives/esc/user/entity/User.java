@@ -1,12 +1,10 @@
-package org.highfives.esc.User.entity;
+package org.highfives.esc.user.entity;
 
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-
-import java.util.Date;
 
 @Entity
 @Table(name = "user")

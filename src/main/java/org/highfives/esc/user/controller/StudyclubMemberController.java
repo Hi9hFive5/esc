@@ -1,8 +1,8 @@
-package org.highfives.esc.User.controller;
+package org.highfives.esc.user.controller;
 
-import org.highfives.esc.User.dao.StudyclubMemberMapper;
-import org.highfives.esc.User.dto.StudyclubMemberDTO;
-import org.highfives.esc.User.service.StudyclubMemberService;
+import org.highfives.esc.user.dao.StudyclubMemberMapper;
+import org.highfives.esc.user.dto.StudyclubMemberDTO;
+import org.highfives.esc.user.service.StudyclubMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,12 +11,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/studyclubMember")
 public class StudyclubMemberController {
     private final StudyclubMemberService studyclubMemberService;
-    private final StudyclubMemberMapper studyclubMemberMapper;
 
     @Autowired
-    public StudyclubMemberController(StudyclubMemberService studyclubMemberService, StudyclubMemberMapper studyclubMemberMapper) {
+    public StudyclubMemberController(StudyclubMemberService studyclubMemberService) {
         this.studyclubMemberService = studyclubMemberService;
-        this.studyclubMemberMapper = studyclubMemberMapper;
     }
 
     /* 설명. 스터디 클럽 멤버 추가 기능 */
@@ -38,4 +36,7 @@ public class StudyclubMemberController {
 
         return ResponseEntity.ok().build();
     }
+
+
+
 }

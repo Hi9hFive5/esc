@@ -1,13 +1,13 @@
-package org.highfives.esc.User.controller;
+package org.highfives.esc.user.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.highfives.esc.User.dao.UserMapper;
-import org.highfives.esc.User.dto.StudyclubMemberDTO;
-import org.highfives.esc.User.dto.UserDTO;
-import org.highfives.esc.User.service.UserService;
+import org.highfives.esc.user.dao.UserMapper;
+import org.highfives.esc.user.dto.StudyclubInfoDTO;
+import org.highfives.esc.user.dto.UserDTO;
+import org.highfives.esc.user.dto.UserInfoDTO;
+import org.highfives.esc.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,12 +18,10 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
-    private final UserMapper userMapper;
 
     @Autowired
-    public UserController(UserService userService, UserMapper userMapper) {
+    public UserController(UserService userService) {
         this.userService = userService;
-        this.userMapper = userMapper;
     }
 
     /* 설명. userId를 이용한 조회 */
@@ -67,9 +65,9 @@ public class UserController {
     /* 설명. 회원이 참여한 스터디 클럽 조회 */
 
     @GetMapping("/joinStudyClub/{member_id}")
-    public ResponseEntity<List<StudyclubMemberDTO>> findJoinStudyClubById(@PathVariable("member_id") String id) {
+    public ResponseEntity<List<StudyclubInfoDTO>> findJoinStudyClubById(@PathVariable("member_id") String memberId) {
 
-        List<StudyclubMemberDTO> studyclubMemberDTO = userService.findJoinStudyClubById(id);
+        List<StudyclubInfoDTO> studyclubMemberDTO = userService.findJoinStudyClubById(memberId);
 
 
         return ResponseEntity.ok().body(studyclubMemberDTO);
@@ -103,4 +101,12 @@ public class UserController {
         return ResponseEntity.ok().body(userDTO);
     }
 
+    /* 설명. 프로젝트 참여 회원 이름 조회 */
+    @GetMapping("/findJoinMemberAndName/{studyclub_id}")
+    public ResponseEntity<List<UserInfoDTO>> findJoinMemberAndNameById(@PathVariable("studyclub_id") String studyclubId){
+
+        List<UserInfoDTO> userInfoDTO = userService.findJoinMemberAndNameById(studyclubId);
+
+        return ResponseEntity.ok().body(userInfoDTO);
+    }
 }

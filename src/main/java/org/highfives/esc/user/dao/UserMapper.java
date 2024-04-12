@@ -1,9 +1,9 @@
-package org.highfives.esc.User.dao;
+package org.highfives.esc.user.dao;
 
-import org.highfives.esc.User.dto.StudyclubMemberDTO;
-import org.highfives.esc.User.dto.UserDTO;
-import org.highfives.esc.User.entity.StudyclubMember;
-import org.highfives.esc.User.entity.User;
+import org.highfives.esc.user.dto.StudyclubMemberDTO;
+import org.highfives.esc.user.dto.UserDTO;
+import org.highfives.esc.user.entity.StudyclubMember;
+import org.highfives.esc.user.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;

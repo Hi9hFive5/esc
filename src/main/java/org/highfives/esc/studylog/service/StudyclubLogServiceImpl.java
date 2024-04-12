@@ -3,11 +3,14 @@ package org.highfives.esc.studylog.service;
 import lombok.extern.slf4j.Slf4j;
 import org.highfives.esc.studylog.dao.StudyclubLogMapper;
 import org.highfives.esc.studylog.dto.StudyclubLogDTO;
+import org.highfives.esc.studylog.dto.StudyclubLogInfoDTO;
 import org.highfives.esc.studylog.entity.StudyclubLog;
 import org.highfives.esc.studylog.repository.StudyclubLogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Slf4j
 @Service
@@ -31,7 +34,7 @@ public class StudyclubLogServiceImpl implements StudyclubLogService {
 
         studyclubLogRepository.save(studyclubLog);
 
-//        log.info("studyclubLog={}", studyclubLog);
+        log.info("studyclubLog={}", studyclubLog);
 
         return studyclubLogDTOData;
     }
@@ -59,5 +62,20 @@ public class StudyclubLogServiceImpl implements StudyclubLogService {
     public void deleteStudyLog(String id) {
 
         studyclubLogRepository.deleteById(Integer.valueOf(id));
+    }
+
+    @Override
+    public StudyclubLogDTO findStudyLogById(String id) throws IllegalAccessException {
+            StudyclubLog studyclubLog = studyclubLogRepository.findById(Integer.valueOf(id)).orElseThrow(IllegalAccessException::new);
+
+            return studyclubLogMapper.studyclubLogTostudyclubLogDTO(studyclubLog);
+
+    }
+
+    public List<StudyclubLogInfoDTO> findStudyclubLogById(String studyclubId) {
+
+        List<StudyclubLogInfoDTO> studyclubLog = studyclubLogRepository.findStudyclubLogById(studyclubId);
+
+        return studyclubLog;
     }
 }

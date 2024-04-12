@@ -1,4 +1,4 @@
-package org.highfives.esc.User.controller;
+package org.highfives.esc.user.controller;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,4 +1,4 @@
-package org.highfives.esc.User.dto;
+package org.highfives.esc.user.dto;
 
 
 import lombok.*;

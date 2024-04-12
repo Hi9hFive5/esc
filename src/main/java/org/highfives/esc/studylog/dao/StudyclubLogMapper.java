@@ -15,4 +15,6 @@ public interface StudyclubLogMapper {
     StudyclubLog studyclubLogDTOTostudyclubLog(StudyclubLogDTO studyclubLogDTOData);
 
 
+    @Mapping(target = "id", source = "id")
+    StudyclubLogDTO studyclubLogTostudyclubLogDTO(StudyclubLog studyclubLog);
 }
