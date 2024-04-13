@@ -18,4 +18,22 @@ public class StudyScheduleDTO {
     private char useState;                  // 일정 삭제 여부
     private int writerId;                   // 일정 작성 멤버(리더)
     private int studyclubId;                // 해당 스터디클럽
+
+    public StudyScheduleDTO(String title, String content, LocalDateTime startDatetime, LocalDateTime endDatetime, char useState, int writerId, int studyclubId) {
+        this.title = title;
+        this.content = content;
+        this.startDatetime = startDatetime;
+        this.endDatetime = endDatetime;
+        this.useState = useState;
+        this.writerId = writerId;
+        this.studyclubId = studyclubId;
+    }
+
+    public StudyScheduleDTO(int id, String title, String content, LocalDateTime startDatetime, LocalDateTime endDatetime) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.startDatetime = startDatetime;
+        this.endDatetime = endDatetime;
+    }
 }

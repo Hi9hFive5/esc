@@ -41,4 +41,14 @@ public class StudySchedule {
 
     @Column(name = "studyclub_id")
     private int studyclubId;                // 해당 스터디클럽
+
+    public StudySchedule(String title, String content, LocalDateTime startDatetime, LocalDateTime endDatetime, char useState, int writerId, int studyclubId) {
+        this.title = title;
+        this.content = content;
+        this.startDatetime = startDatetime;
+        this.endDatetime = endDatetime;
+        this.useState = useState;
+        this.writerId = writerId;
+        this.studyclubId = studyclubId;
+    }
 }
