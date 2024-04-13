@@ -1,6 +1,7 @@
 package org.highfives.esc.schedule.service;
 
 import org.highfives.esc.schedule.dto.StudyScheduleDTO;
+import org.highfives.esc.schedule.vo.ResponseScheduleVO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,18 +23,16 @@ class StudyScheduleServiceTest {
 
     @Test
     @DisplayName("id로 스터디 일정 조회")
-    @Transactional
     void findStudyScheduleByIdTest() {
-        int id = 5;
-        System.out.println(id);
-        StudyScheduleDTO studyScheduleDTO = studyScheduleService.findStudyScheduleById(id);
+        int id = 1;
 
-        assertNotNull(studyScheduleDTO);
+        ResponseScheduleVO response = studyScheduleService.findStudyScheduleById(id);
+
+        assertNotNull(response);
     }
 
     @Test
     @DisplayName("스터디클럽 id로 스터디 일정 조회")
-    @Transactional
     void findStudyScheduleByStudyculbIdTest() {
         int studyId = 1;
 
@@ -43,7 +43,6 @@ class StudyScheduleServiceTest {
 
     @Test
     @DisplayName("스터디 일정 추가")
-//    @Transactional
     void saveStudyScheduleTest() {
         String startTime = "2024-04-03 18:30:00";
         DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -62,7 +61,11 @@ class StudyScheduleServiceTest {
                 6,
                 2);
 
-        studyScheduleService.saveStudySchedule(studyScheduleDTO);
+        Integer[] participant = {1, 2, 3, 4};
+        ArrayList<Integer> participantList = new ArrayList<>();
+        participantList.addAll(Arrays.asList(participant));
+
+        studyScheduleService.saveStudySchedule(studyScheduleDTO, participantList);
 
         assertNotNull(studyScheduleService.findStudyScheduleById(6));
     }
@@ -86,7 +89,11 @@ class StudyScheduleServiceTest {
                 start,
                 end );
 
-        studyScheduleService.modifyStudySchedule(studyScheduleDTO);
+        Integer[] p = {1, 2, 3, 4};
+        ArrayList<Integer> participantList = new ArrayList<>();
+        participantList.addAll(Arrays.asList(p));
+
+        studyScheduleService.modifyStudySchedule(studyScheduleDTO, participantList);
         assertEquals(studyScheduleDTO.getContent(), studyScheduleService.findStudyScheduleById(1).getContent());
     }
 
@@ -94,9 +101,9 @@ class StudyScheduleServiceTest {
     @DisplayName("스터디 일정 삭제")
     @Transactional
     void removeStudyScheduleTest() {
-        int id = 5;
+        int id = 1;
 
         studyScheduleService.removeStudySchedule(id);
-        assertEquals('N', studyScheduleService.findStudyScheduleById(id).getUseState());
+        assertEquals('N', studyScheduleService.findStudyScheduleById(id).getUseStatus());
     }
 }
