@@ -1,5 +1,6 @@
 package org.highfives.esc.studyclub.controller;
 
+import org.highfives.esc.studyclub.dto.GoalDTO;
 import org.highfives.esc.studyclub.dto.StudyCategoryDTO;
 import org.highfives.esc.studyclub.dto.StudyclubDTO;
 import org.highfives.esc.studyclub.service.StudyclubService;
@@ -73,10 +74,28 @@ public class StudyclubController {
     }
 
     @GetMapping("/category/{categoryId}")
-    public ResponseEntity<StudyCategoryDTO> findStudyCategoryNameById(@PathVariable int categoryId) {
+    public ResponseEntity<StudyCategoryDTO> findStudyCategoryById(@PathVariable int categoryId) {
 
-        StudyCategoryDTO studyCategory= studyclubService.findCategoryNameById(categoryId);
+        StudyCategoryDTO studyCategory= studyclubService.findStudyCategoryById(categoryId);
 
         return ResponseEntity.ok().body(studyCategory);
+    }
+
+    // 스터디 카테고리별 목표 목록 조회
+    @GetMapping("/goal/{studyId}")
+    public ResponseEntity<List<GoalDTO>> findGoalsByStudyId(@PathVariable int studyId) {
+
+        List<GoalDTO> goalList = studyclubService.findGoalsByStudyId(studyId);
+
+        return ResponseEntity.ok().body(goalList);
+    }
+
+    // 클럽별 스터디 목표 조회
+    @GetMapping("/study-goal/{clubId}")
+    public ResponseEntity<GoalDTO> findGoalByClubId(@PathVariable int clubId) {
+
+        GoalDTO studyGoal = studyclubService.findGoalByClubId(clubId);
+
+        return ResponseEntity.ok().body(studyGoal);
     }
 }
