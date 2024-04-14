@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.highfives.esc.studylog.dao.StudyclubLogMapper;
 import org.highfives.esc.studylog.dto.StudyclubLogDTO;
 import org.highfives.esc.studylog.dto.StudyclubLogInfoDTO;
+import org.highfives.esc.studylog.dto.StudyclubLogMemberInfoDTO;
 import org.highfives.esc.studylog.entity.StudyclubLog;
 import org.highfives.esc.studylog.repository.StudyclubLogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,4 +79,12 @@ public class StudyclubLogServiceImpl implements StudyclubLogService {
 
         return studyclubLog;
     }
+
+    @Override
+    public List<StudyclubLogMemberInfoDTO> findWritingStudyclubLogById(String id) {
+        List<StudyclubLogMemberInfoDTO> studyclubLog = studyclubLogRepository.findWritingStudyclubLogById(id);
+
+        return studyclubLog;
+    }
+
 }

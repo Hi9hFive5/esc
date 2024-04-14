@@ -1,6 +1,7 @@
 package org.highfives.esc.studylog.repository;
 
 import org.highfives.esc.studylog.dto.StudyclubLogInfoDTO;
+import org.highfives.esc.studylog.dto.StudyclubLogMemberInfoDTO;
 import org.highfives.esc.studylog.entity.StudyclubLog;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -14,4 +15,12 @@ public interface StudyclubLogRepository extends JpaRepository<StudyclubLog, Inte
 
     @Query(value = "SELECT new org.highfives.esc.studylog.dto.StudyclubLogInfoDTO(s2.id, s1.content, s1.studyclubId) FROM StudyclubLog s1 JOIN Studyclub s2 ON s2.id = s1.studyclubId WHERE s1.studyclubId = :studyclub_id")
     List<StudyclubLogInfoDTO> findStudyclubLogById(@Param("studyclub_id") String studyclubId);
+
+    @Query(value = "SELECT new org.highfives.esc.studylog.dto.StudyclubLogMemberInfoDTO(s3.id, s1.studyclubId, s1.memberId, s3.content) FROM StudyclubMember s1 " +
+            "JOIN User s2 ON s2.id = s1.memberId " +
+            "JOIN StudyclubLog s3 ON s3.studyclubId = s1.studyclubId " +
+            "WHERE s1.memberId = :member_id")
+    List<StudyclubLogMemberInfoDTO> findWritingStudyclubLogById(@Param("member_id") String memberId);
+
+
 }
