@@ -25,6 +25,4 @@ public class StudyclubDTO {
 
     private int leaderId;
 
-    private int studyId;
-
 }

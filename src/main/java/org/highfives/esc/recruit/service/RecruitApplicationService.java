@@ -2,7 +2,11 @@ package org.highfives.esc.recruit.service;
 
 import org.highfives.esc.recruit.dto.RecruitApplicationDTO;
 import org.highfives.esc.recruit.entity.RecruitApplication;
+import org.highfives.esc.recruit.entity.RecruitPost;
 import org.highfives.esc.recruit.repository.RecruitApplicationRepo;
+import org.highfives.esc.recruit.repository.RecruitPostRepo;
+import org.highfives.esc.studyclub.entity.Studyclub;
+import org.highfives.esc.studyclub.repository.StudyclubRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,13 +19,16 @@ import java.util.List;
 public class RecruitApplicationService {
 
     private final ModelMapper mapper;
-
     private final RecruitApplicationRepo recruitApplicationRepo;
+    private final RecruitPostRepo recruitPostRepo;
+    private final StudyclubRepository studyclubRepository;
 
     @Autowired
-    public RecruitApplicationService(ModelMapper mapper, RecruitApplicationRepo recruitApplicationRepo) {
+    public RecruitApplicationService(ModelMapper mapper, RecruitApplicationRepo recruitApplicationRepo, RecruitPostRepo recruitPostRepo, StudyclubRepository studyclubRepository) {
         this.mapper = mapper;
         this.recruitApplicationRepo = recruitApplicationRepo;
+        this.recruitPostRepo = recruitPostRepo;
+        this.studyclubRepository = studyclubRepository;
     }
 
     @Transactional(readOnly = true)
@@ -70,6 +77,11 @@ public class RecruitApplicationService {
         RecruitApplication recruitApplication = recruitApplicationRepo.findById(applyId).orElseThrow(IllegalArgumentException::new);
 
         recruitApplication.setRecruitStatus("수락");
+
+        RecruitPost recruitPost = recruitPostRepo.findById(recruitApplication.getRecruitPostId()).orElseThrow(IllegalArgumentException::new);
+        Studyclub studyclub = studyclubRepository.findById(recruitPost.getClubId()).orElseThrow(IllegalArgumentException::new);
+
+        studyclub.setMemberCount(studyclub.getMemberCount() + 1);
 
         return mapper.map(recruitApplication, RecruitApplicationDTO.class);
     }

@@ -35,13 +35,7 @@ public class Studyclub {
     @Column(name = "member_limit")
     private int memberLimit;
 
-    @Column(name = "end_date")
-    private String endDate;
-
     @Column(name = "leader_id")
     private int leaderId;
-
-    @Column(name = "study_id")
-    private int studyId;
 
 }

@@ -19,4 +19,7 @@ public class StudyclubVO {
 
     private int studyId;
 
+    private int examId;
+
+    private int goalId;
 }
