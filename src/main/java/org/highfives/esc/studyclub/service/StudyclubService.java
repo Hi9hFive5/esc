@@ -8,6 +8,8 @@ import org.highfives.esc.crawling.repository.ExamRepository;
 import org.highfives.esc.studyclub.dto.GoalDTO;
 import org.highfives.esc.studyclub.dto.StudyCategoryDTO;
 import org.highfives.esc.studyclub.dto.StudyclubDTO;
+import org.highfives.esc.studyclub.entity.Goal;
+import org.highfives.esc.studyclub.entity.StudyCategory;
 import org.highfives.esc.studyclub.entity.Studyclub;
 import org.highfives.esc.studyclub.entity.StudyclubExam;
 import org.highfives.esc.studyclub.repository.GoalRepository;
