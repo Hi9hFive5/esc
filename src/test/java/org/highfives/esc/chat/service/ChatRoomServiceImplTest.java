@@ -14,7 +14,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.time.LocalDateTime;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class ChatRoomServiceImplTest {
@@ -63,6 +62,15 @@ class ChatRoomServiceImplTest {
 
         Assertions.assertDoesNotThrow(
                 () -> chatRoomService.findChatRoomByName(roomName)
+        );
+    }
+
+    @DisplayName("마지막 채팅방 번호 조회(채팅방 생성 시 사용)")
+    @Test
+    void findLastRoomTest() {
+
+        Assertions.assertDoesNotThrow(
+                () -> chatRoomService.findLastRoom()
         );
     }
 
