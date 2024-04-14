@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import org.highfives.esc.chat.dto.ChatRoomDTO;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -24,26 +25,53 @@ class ChatRoomServiceImplTest {
     static Stream<Arguments> chatRoomInfo() {
 
         return Stream.of(
-                Arguments.of("토익 990점 목표방!!", 1),
-                Arguments.of("IELTS 보실 분 모아봐요", 3)
+                Arguments.of(1),
+                Arguments.of(2)
+        );
+    }
+
+    static Stream<Arguments> chatRoomName() {
+
+        return Stream.of(
+                Arguments.of("토플"),
+                Arguments.of("토익")
         );
     }
 
     static Stream<Arguments> chatRoomDTO() {
 
         return Stream.of(
-                Arguments.of(new ChatRoomDTO("토익 990점 목표방!!", 1, 2, LocalDateTime.now())),
-                Arguments.of(new ChatRoomDTO("IELTS 보실 분 모아봐요", 3, 4, LocalDateTime.now()))
+                Arguments.of(new ChatRoomDTO("토익 990점 목표방!!", 3,  LocalDateTime.now())),
+                Arguments.of(new ChatRoomDTO("IELTS 보실 분 모아봐요", 4,  LocalDateTime.now()))
         );
     }
 
-    @DisplayName("채팅방 제목과 호스트 ID로 채팅방 조회")
+    @DisplayName("채팅방 ID로 채팅방 조회")
     @ParameterizedTest
     @MethodSource("chatRoomInfo")
-    void findChatRoomTest(String roomName, int hostId) {
+    void findChatRoomTest(int roomId) {
 
         Assertions.assertDoesNotThrow(
-                () -> chatRoomService.findChatRoom(roomName, hostId)
+                () -> chatRoomService.findChatRoom(roomId)
+        );
+    }
+
+    @DisplayName("채팅방 제목으로 채팅방 조회")
+    @ParameterizedTest
+    @MethodSource("chatRoomName")
+    void findChatRoomByNameTest(String roomName) {
+
+        Assertions.assertDoesNotThrow(
+                () -> chatRoomService.findChatRoomByName(roomName)
+        );
+    }
+
+    @DisplayName("모든 채팅방 목록 반환")
+    @Test
+    void findAllRoomsTest() {
+
+        Assertions.assertDoesNotThrow(
+                () -> chatRoomService.findAllRooms()
         );
     }
 

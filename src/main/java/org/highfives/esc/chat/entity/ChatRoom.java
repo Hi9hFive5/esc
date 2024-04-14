@@ -29,8 +29,5 @@ public class ChatRoom {
     private int roomHostId;
 
     @Column
-    private int roomGuestId;
-
-    @Column
     private String useStatus;
 }

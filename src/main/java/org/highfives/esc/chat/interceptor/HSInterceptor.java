@@ -30,7 +30,13 @@ public class HSInterceptor implements HandshakeInterceptor {
                                    Map<String, Object> attributes) throws Exception {
         String path = request.getURI().getPath();
         String roomId = path.substring(path.lastIndexOf('/') + 1);
+
+        /* http://~/chat/{roomId} 에서 roomId부분을 따로 떼서 Map으로 저장*/
         attributes.put("roomId", roomId);
+
+        System.out.println("uri = " + request.getURI());
+        System.out.println("path = " + path);
+        System.out.println("roomId = " + roomId);
         return true;
     }
 

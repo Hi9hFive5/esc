@@ -9,8 +9,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ChatRoomRequestVO {
-    private int roomId;
+public class ChatRoomVO {
+    private int id;
     private String roomName;
     private int roomHostId;
 }
