@@ -76,7 +76,6 @@ public class ChatHandler extends TextWebSocketHandler {
         int roomId = getRoomId(session);
         chatRoomManager.chatRoom(roomId).getSessions().remove(session);
 
-
 //        sessions.remove(session); // 삭제
         System.out.println("유저가 떠남");
         //메시지 전송

@@ -21,12 +21,15 @@ public class ChatRoomController {
 
     private final ChatRoomService chatRoomService;
     private final ModelMapper modelMapper;
-
+    private final ChatRoomManager chatRoomManager;
 
     @Autowired
-    public ChatRoomController(ChatRoomService chatRoomService, ModelMapper modelMapper) {
+    public ChatRoomController(ChatRoomService chatRoomService,
+                              ModelMapper modelMapper,
+                              ChatRoomManager chatRoomManager) {
         this.chatRoomService = chatRoomService;
         this.modelMapper = modelMapper;
+        this.chatRoomManager = chatRoomManager;
     }
 
     /* 채팅방 조회
@@ -94,6 +97,7 @@ public class ChatRoomController {
 
         chatRoomDTO = chatRoomService.addNewRoom(chatRoomDTO);
 
+        chatRoomManager.initialChatRoom();
         ChatRoomVO result = modelMapper.map(chatRoomDTO, ChatRoomVO.class);
 
         return ResponseEntity
