@@ -1,11 +1,14 @@
 package org.highfives.esc.user.dto;
 
 
-import lombok.*;
+import jakarta.persistence.Column;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
+import java.time.LocalDateTime;
+
+@Data
 @NoArgsConstructor
-@ToString
 public class UserDTO {
     private int id;
 
@@ -25,7 +28,7 @@ public class UserDTO {
 
     private int point;
 
-    private String endDate;
+    private LocalDateTime endDate;
 
     @Builder
     public UserDTO(int id, String name, String email, String nickname, String status, String password, int report_count, int grade, int point, String end_date) {
