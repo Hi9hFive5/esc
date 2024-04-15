@@ -10,6 +10,7 @@ import org.highfives.esc.studyclub.entity.StudyclubGoal;
 import org.highfives.esc.studyclub.repository.GoalRepository;
 import org.highfives.esc.studyclub.repository.StudyCategoryRepo;
 import org.highfives.esc.studyclub.repository.StudyclubGoalRepository;
+
 import org.highfives.esc.studyclub.repository.StudyclubRepo;
 import org.highfives.esc.studyclub.vo.StudyclubVO;
 import org.modelmapper.ModelMapper;
@@ -63,7 +64,9 @@ public class StudyclubService {
     public StudyclubDTO registStudyclub(StudyclubVO studyclubVO, int leaderId) {
 
         Studyclub studyclub = new Studyclub();
+
         StudyclubGoal studyclubGoal = new StudyclubGoal();
+
 
         studyclub.setName(studyclubVO.getName());
         studyclub.setIntroduce(studyclubVO.getIntroduce());
@@ -93,6 +96,7 @@ public class StudyclubService {
         studyclub.setIntroduce(studyclubVO.getIntroduce());
         studyclub.setMemberLimit(studyclubVO.getMemberLimit());
         studyclub.setEndDate(studyclubVO.getEndDate());
+
         studyclub.setStudyId(studyclubVO.getStudyId());
 
         StudyclubGoal studyclubGoal = studyclubGoalRepository.findByClubId(studyclubId);
@@ -111,6 +115,7 @@ public class StudyclubService {
 
         return mapper.map(studyclub, StudyclubDTO.class);
     }
+
 
     public StudyCategoryDTO findStudyCategoryById(int categoryId) {
 
