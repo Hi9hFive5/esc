@@ -109,7 +109,13 @@ public class UserController {
 
         return ResponseEntity.ok().body(userDTOList);
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<UserDTO> findUserById(@PathVariable String id) {
 
+        UserDTO userDTOList = userService.findUserById(id);
+
+        return ResponseEntity.ok().body(userDTOList);
+    }
     /* 설명. 회원 정지 기능 */
 
     @PutMapping("/ban")

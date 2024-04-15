@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface RecruitApplicationRepository extends JpaRepository<RecruitApplication, Integer> {
 
-    @Query(value = "SELECT new org.highfives.esc.recruit.dto.RecuitApplicationInfoDTO(s2.id, s1.recruitStatus, s1.recruitUserId,s1.recruitPostId,  s2.name) FROM RecruitApplication s1 JOIN User s2 ON s2.id = s1.recruitUserId WHERE s1.recruitPostId = :recruitPostId")
+    @Query(value = "SELECT new org.highfives.esc.recruit.dto.RecuitApplicationInfoDTO(s2.id, s1.recruitStatus, s1.recruitUserId,s1.recruitPostId,  s2.name) FROM RecruitApplication s1 JOIN UserEntity s2 ON s2.id = s1.recruitUserId WHERE s1.recruitPostId = :recruitPostId")
     List<RecuitApplicationInfoDTO> findAllByRecruitId(@Param("recruitPostId") int recruitPostId);
 
     @Query("SELECT apply FROM RecruitApplication apply WHERE apply.recruitUserId = :recruitUserId")

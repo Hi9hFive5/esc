@@ -36,7 +36,7 @@ public class RecruitApplicationService {
     public List<RecuitApplicationInfoDTO> findAllByRecruitId(int recruitPostId) {
 
 
-    List<RecuitApplicationInfoDTO> recruitApplicationList = recruitApplicationRepo.findAllByRecruitId(recruitPostId);
+    List<RecuitApplicationInfoDTO> recruitApplicationList = recruitApplicationRepository.findAllByRecruitId(recruitPostId);
 
 
 
