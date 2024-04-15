@@ -1,6 +1,6 @@
 package org.highfives.esc;
 
-import org.highfives.esc.crawling.ExamCrawler;
+import org.highfives.esc.crawling.service.ExamCrawler;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;

@@ -1,9 +1,6 @@
 package org.highfives.esc.studyclub.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 @NoArgsConstructor
@@ -16,6 +13,7 @@ import lombok.*;
 public class Studyclub {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
@@ -38,3 +36,4 @@ public class Studyclub {
     private int leaderId;
 
 }
+

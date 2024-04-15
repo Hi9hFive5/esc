@@ -1,4 +1,4 @@
-package org.highfives.esc.crawling;
+package org.highfives.esc.crawling.service;
 
 import org.highfives.esc.crawling.entity.Exam;
 import org.highfives.esc.crawling.repository.ExamRepository;

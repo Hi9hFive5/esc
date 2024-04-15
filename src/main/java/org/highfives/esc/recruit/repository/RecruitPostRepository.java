@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface RecruitPostRepo extends JpaRepository<RecruitPost, Integer> {
+public interface RecruitPostRepository extends JpaRepository<RecruitPost, Integer> {
 
     @Query("SELECT post FROM RecruitPost post WHERE post.writerId = :writerId")
     List<RecruitPost> findAllByLeaderId(@Param("writerId") int writerId);

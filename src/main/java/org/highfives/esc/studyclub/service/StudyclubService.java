@@ -1,13 +1,14 @@
 package org.highfives.esc.studyclub.service;
 
 import jakarta.annotation.PostConstruct;
-import org.highfives.esc.crawling.ExamCrawler;
+import org.highfives.esc.crawling.service.ExamCrawler;
 import org.highfives.esc.crawling.dto.ExamDTO;
 import org.highfives.esc.crawling.entity.Exam;
 import org.highfives.esc.crawling.repository.ExamRepository;
 import org.highfives.esc.studyclub.dto.GoalDTO;
 import org.highfives.esc.studyclub.dto.StudyCategoryDTO;
 import org.highfives.esc.studyclub.dto.StudyclubDTO;
+import org.highfives.esc.studyclub.dto.StudyclubExamDTO;
 import org.highfives.esc.studyclub.entity.Goal;
 import org.highfives.esc.studyclub.entity.StudyCategory;
 import org.highfives.esc.studyclub.entity.Studyclub;
@@ -127,6 +128,11 @@ public class StudyclubService {
 
         studyclub.setDeleteStatus("Y");
 
+        StudyclubExam studyclubExam = studyclubExamRepository.findByClubId(studyclubId);
+
+        studyclubExamRepository.deleteById(studyclubExam.getId());
+
+
         return mapper.map(studyclub, StudyclubDTO.class);
     }
 
@@ -135,6 +141,13 @@ public class StudyclubService {
         StudyCategory studyCategory = studyCategoryRepository.findById(categoryId).orElseThrow(IllegalArgumentException::new);
 
         return mapper.map(studyCategory, StudyCategoryDTO.class);
+    }
+
+    public StudyclubExamDTO findStudyclubExamById(int clubId) {
+
+        StudyclubExam studyclubExam = studyclubExamRepository.findByClubId(clubId);
+
+        return mapper.map(studyclubExam, StudyclubExamDTO.class);
     }
 
     public List<StudyCategoryDTO> findAllStudyCategory() {

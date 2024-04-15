@@ -8,8 +8,12 @@ import lombok.*;
 @Setter
 @ToString
 public class StudyclubExamDTO {
+
     private int id;
+
     private int clubId;
+
     private int goalId;
+
     private int examId;
 }

@@ -26,3 +26,5 @@ public class StudyclubDTO {
     private int leaderId;
 
 }
+
+

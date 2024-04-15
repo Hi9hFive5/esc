@@ -2,7 +2,7 @@ package org.highfives.esc.recruit.service;
 
 import org.highfives.esc.recruit.dto.RecruitPostDTO;
 import org.highfives.esc.recruit.entity.RecruitPost;
-import org.highfives.esc.recruit.repository.RecruitPostRepo;
+import org.highfives.esc.recruit.repository.RecruitPostRepository;
 import org.highfives.esc.recruit.vo.RecruitPostVO;
 import org.highfives.esc.studyclub.dto.StudyclubDTO;
 import org.highfives.esc.studyclub.service.StudyclubService;
@@ -20,20 +20,20 @@ import java.util.List;
 public class RecruitService {
 
     private final ModelMapper mapper;
-    private final RecruitPostRepo recruitPostRepo;
+    private final RecruitPostRepository recruitPostRepository;
     private final StudyclubService studyclubService;
 
     @Autowired
-    public RecruitService(ModelMapper mapper, RecruitPostRepo recruitPostRepo, StudyclubService studyclubService) {
+    public RecruitService(ModelMapper mapper, RecruitPostRepository recruitPostRepository, StudyclubService studyclubService) {
         this.mapper = mapper;
-        this.recruitPostRepo = recruitPostRepo;
+        this.recruitPostRepository = recruitPostRepository;
         this.studyclubService = studyclubService;
     }
 
     @Transactional(readOnly = true)
     public List<RecruitPostDTO> findAllRecruitPosts() {
 
-        List<RecruitPost> recruitPostList = recruitPostRepo.findAll();
+        List<RecruitPost> recruitPostList = recruitPostRepository.findAll();
         List<RecruitPostDTO> recruitPostDTOList = new ArrayList<>();
 
         for (RecruitPost recruitPost : recruitPostList) {
@@ -46,7 +46,7 @@ public class RecruitService {
     @Transactional(readOnly = true)
     public List<RecruitPostDTO> findRecruitPostsByLeaderId(int leaderId) {
 
-        List<RecruitPost> recruitPostList = recruitPostRepo.findAllByLeaderId(leaderId);
+        List<RecruitPost> recruitPostList = recruitPostRepository.findAllByLeaderId(leaderId);
         List<RecruitPostDTO> recruitPostDTOList = new ArrayList<>();
 
         for (RecruitPost recruitPost : recruitPostList) {
@@ -59,7 +59,7 @@ public class RecruitService {
     @Transactional(readOnly = true)
     public RecruitPostDTO findRecruitPostById(int postId) {
 
-        RecruitPost recruitPost = recruitPostRepo.findById(postId).orElseThrow(IllegalArgumentException::new);
+        RecruitPost recruitPost = recruitPostRepository.findById(postId).orElseThrow(IllegalArgumentException::new);
 
         return mapper.map(recruitPost, RecruitPostDTO.class);
     }
@@ -86,15 +86,15 @@ public class RecruitService {
         recruitPost.setWriterId(studyclub.getLeaderId());
         recruitPost.setClubId(clubId);
 
-        recruitPostRepo.save(recruitPost);
+        recruitPostRepository.save(recruitPost);
 
         return mapper.map(recruitPost, RecruitPostDTO.class);
     }
 
     @Transactional
-    public RecruitPostDTO modifyRecruitPost(int recruitId, RecruitPostVO recruitPostVO) {
+    public RecruitPostDTO modifyRecruitPost(int postId, RecruitPostVO recruitPostVO) {
 
-        RecruitPost recruitPost = recruitPostRepo.findById(recruitId).orElseThrow(IllegalArgumentException::new);
+        RecruitPost recruitPost = recruitPostRepository.findById(postId).orElseThrow(IllegalArgumentException::new);
 
         recruitPost.setTitle(recruitPostVO.getTitle());
         recruitPost.setContent(recruitPostVO.getContent());
@@ -106,9 +106,9 @@ public class RecruitService {
     }
 
     @Transactional
-    public RecruitPostDTO deleteRecruitPost(int recruitId) {
+    public RecruitPostDTO deleteRecruitPost(int postId) {
 
-        RecruitPost recruitPost = recruitPostRepo.findById(recruitId).orElseThrow(IllegalArgumentException::new);
+        RecruitPost recruitPost = recruitPostRepository.findById(postId).orElseThrow(IllegalArgumentException::new);
 
         recruitPost.setDeleteStatus("Y");
 
