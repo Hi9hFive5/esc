@@ -45,7 +45,7 @@ public class StudyScheduleService {
             response.setContent(studySchedule.getContent());
             response.setStart(studySchedule.getStartDatetime());
             response.setEnd(studySchedule.getEndDatetime());
-            response.setUseStatus(studySchedule.getUseState());
+            response.setUseStatus(studySchedule.getUseStatus());
             response.setStudyclubId(studySchedule.getStudyclubId());
             response.setWriterId(studySchedule.getWriterId());
 
@@ -139,7 +139,7 @@ public class StudyScheduleService {
 
         StudySchedule studySchedule = studyScheduleRepository.findById(id);
         if(studySchedule != null){
-            studySchedule.setUseState('N');
+            studySchedule.setUseStatus('N');
             if(!studyScheduleParticipantRepository.findByScheduleId(id).isEmpty()){
                 studyScheduleParticipantRepository.deleteAllByScheduleId(id);
             }
