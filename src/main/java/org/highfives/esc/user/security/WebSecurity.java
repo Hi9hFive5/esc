@@ -71,6 +71,7 @@ public class WebSecurity {
                                 .requestMatchers(new AntPathRequestMatcher("/studyLog/**", "POST")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/studyLog/**", "PUT")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/chat/room/**")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/chat/**")).permitAll()
 
 //                .requestMatchers("/**").access(
 //                        new WebExpressionAuthorizationManager("hasIpAddress('127.0.0.1') or hasIpAddress('192.168.0.26')"))

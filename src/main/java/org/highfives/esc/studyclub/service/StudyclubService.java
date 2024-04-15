@@ -83,9 +83,6 @@ public class StudyclubService {
         Studyclub studyclub = new Studyclub();
         StudyclubExam studyclubExam = new StudyclubExam();
 
-        StudyclubGoal studyclubGoal = new StudyclubGoal();
-
-
         studyclub.setName(studyclubVO.getName());
         studyclub.setIntroduce(studyclubVO.getIntroduce());
         studyclub.setMemberLimit(studyclubVO.getMemberLimit());

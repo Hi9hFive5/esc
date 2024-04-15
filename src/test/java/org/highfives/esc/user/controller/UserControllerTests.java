@@ -91,7 +91,7 @@ class UserControllerTests {
                 .password("pass012")
                 .email("ujae@gmail.com")
                 .nickname("메뚜기")
-                .end_date(null)
+                .endDate(null)
                 .report_count(0)
                 .status("N")
                 .build();
@@ -179,7 +179,7 @@ class UserControllerTests {
         UserDTO userDTO = UserDTO.builder()
                 .email("test@test.com")
                 .name("홍길동")
-                .end_date(null)
+                .endDate(null)
                 .grade(0)
                 .point(0)
                 .report_count(0)

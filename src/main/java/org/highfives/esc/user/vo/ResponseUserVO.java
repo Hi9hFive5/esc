@@ -22,5 +22,5 @@ public class ResponseUserVO {
 
     private int point;
 
-    private java.util.Date end_date;
+    private java.util.Date endDate;
 }
