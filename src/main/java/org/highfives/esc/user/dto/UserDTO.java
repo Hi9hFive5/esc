@@ -1,7 +1,7 @@
 package org.highfives.esc.user.dto;
 
 
-import jakarta.persistence.Column;
+import lombok.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -31,7 +31,7 @@ public class UserDTO {
     private LocalDateTime endDate;
 
     @Builder
-    public UserDTO(int id, String name, String email, String nickname, String status, String password, int report_count, int grade, int point, String end_date) {
+    public UserDTO(int id, String name, String email, String nickname, String status, String password, int report_count, int grade, int point, LocalDateTime endDate) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -41,6 +41,6 @@ public class UserDTO {
         this.reportCount = report_count;
         this.grade = grade;
         this.point = point;
-        this.endDate = end_date;
+        this.endDate = endDate;
     }
 }

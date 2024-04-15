@@ -25,6 +25,6 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
     @Query(value = "SELECT new org.highfives.esc.user.dto.StudyclubInfoDTO(s1.id, s1.name, s2.studyclubId) FROM Studyclub s1 JOIN StudyclubMember s2 ON s1.id = s2.studyclubId WHERE s2.memberId = :member_id")
     List<StudyclubInfoDTO> findJoinStudyClubById(@Param("member_id") String memberId);
 
-    @Query(value = "SELECT new org.highfives.esc.user.dto.UserInfoDTO(u.id, u.name, s.memberId) FROM User u JOIN StudyclubMember s ON u.id = s.memberId WHERE s.studyclubId = :studyclub_id")
+    @Query(value = "SELECT new org.highfives.esc.user.dto.UserInfoDTO(u.id, u.name, s.memberId) FROM UserEntity u JOIN StudyclubMember s ON u.id = s.memberId WHERE s.studyclubId = :studyclub_id")
     List<UserInfoDTO> findJoinMemberAndNameById(@Param("studyclub_id") String studyclubId);
 }

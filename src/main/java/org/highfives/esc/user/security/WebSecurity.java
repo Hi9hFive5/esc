@@ -60,6 +60,13 @@ public class WebSecurity {
                                 .requestMatchers(new AntPathRequestMatcher("/user/**", "GET")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/mailSend", "POST")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/user/resetPassword", "POST")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/recruit/**", "GET")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/recruit/**", "POST")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/recruit-apply/**", "GET")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/recruit-apply/**", "POST")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/studyclub/**", "GET")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/studyclub/**", "POST")).permitAll()
+
 //                .requestMatchers("/**").access(
 //                        new WebExpressionAuthorizationManager("hasIpAddress('127.0.0.1') or hasIpAddress('192.168.0.26')"))
                                 .anyRequest().authenticated()

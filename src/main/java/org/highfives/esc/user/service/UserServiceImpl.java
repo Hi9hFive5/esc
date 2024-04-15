@@ -164,7 +164,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public UserDTO findUserById(String id) {
-        User user = userRepository.findById(Integer.valueOf(id)).orElseThrow(IllegalArgumentException::new);
+        UserEntity user = userRepository.findById(Long.valueOf(Integer.valueOf(id))).orElseThrow(IllegalArgumentException::new);
 
         return userMapper.userToUserDTO(user);
     }
@@ -173,14 +173,14 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public List<UserDTO> findUserList() {
 
-        List<User> userList = userRepository.findAll();
+        List<UserEntity> userList = userRepository.findAll();
         return userMapper.userListToUserListDTO(userList);
     }
 
     @Override
     @Transactional
     public UserDTO banUserById(UserDTO banUser) {
-        User userInfo = userRepository.findById(banUser.getId()).orElseThrow(IllegalArgumentException::new);
+        UserEntity userInfo = userRepository.findById((long) banUser.getId()).orElseThrow(IllegalArgumentException::new);
 
         UserDTO userDTO = UserDTO.builder()
                 .id(banUser.getId())
@@ -190,7 +190,7 @@ public class UserServiceImpl implements UserService {
                 .password(userInfo.getPassword())
                 .email(userInfo.getEmail())
                 .nickname(userInfo.getNickname())
-                .end_date(userInfo.getEndDate())
+                .endDate(userInfo.getEndDate())
                 .report_count(userInfo.getReportCount())
                 .status(banUser.getStatus())
                 .build();
@@ -211,7 +211,7 @@ public class UserServiceImpl implements UserService {
                 .password(updateUser.getPassword())
                 .email(updateUser.getEmail())
                 .nickname(updateUser.getNickname())
-                .end_date(updateUser.getEndDate())
+                .endDate(updateUser.getEndDate())
                 .report_count(updateUser.getReportCount())
                 .status(updateUser.getStatus())
                 .build();
@@ -240,9 +240,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO getUserPoint(UserDTO userDTOdata) {
-        User userInfo = userRepository.findById(userDTOdata.getId()).orElseThrow(IllegalArgumentException::new);
-
-
+        UserEntity userInfo = userRepository.findById((long) userDTOdata.getId()).orElseThrow(IllegalArgumentException::new);
 
         UserDTO userDTO = UserDTO.builder()
                 .id(userInfo.getId())
@@ -252,7 +250,7 @@ public class UserServiceImpl implements UserService {
                 .password(userInfo.getPassword())
                 .email(userInfo.getEmail())
                 .nickname(userInfo.getNickname())
-                .end_date(userInfo.getEndDate())
+                .endDate(userInfo.getEndDate())
                 .report_count(userInfo.getReportCount())
                 .status(userInfo.getStatus())
                 .build();
@@ -270,7 +268,7 @@ public class UserServiceImpl implements UserService {
                     .password(userDTO.getPassword())
                     .email(userDTO.getEmail())
                     .nickname(userDTO.getNickname())
-                    .end_date(userDTO.getEndDate())
+                    .endDate(userDTO.getEndDate())
                     .report_count(userDTO.getReportCount())
                     .status(userDTO.getStatus())
                     .build();
@@ -287,7 +285,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO userWithdrawalById(UserDTO userDTOData) {
-        User userInfo = userRepository.findById(userDTOData.getId()).orElseThrow(IllegalArgumentException::new);
+        UserEntity userInfo = userRepository.findById((long) userDTOData.getId()).orElseThrow(IllegalArgumentException::new);
 
         UserDTO userDTO = UserDTO.builder()
                 .id(userInfo.getId())
@@ -297,7 +295,7 @@ public class UserServiceImpl implements UserService {
                 .password(userInfo.getPassword())
                 .email(userInfo.getEmail())
                 .nickname(userInfo.getNickname())
-                .end_date(userInfo.getEndDate())
+                .endDate(userInfo.getEndDate())
                 .report_count(userInfo.getReportCount())
                 .status(userDTOData.getStatus())
                 .build();
@@ -309,7 +307,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO signUp(UserDTO userDTOData) {
 
-        User user = userMapper.userDTOToUser(userDTOData);
+        UserEntity user = userMapper.userDTOToUser(userDTOData);
 
         userRepository.save(user);
 
