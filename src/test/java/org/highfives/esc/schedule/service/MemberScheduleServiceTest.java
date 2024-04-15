@@ -56,7 +56,7 @@ class MemberScheduleServiceTest {
 
     @Test
     @DisplayName("일정 추가")
-//    @Transactional
+    @Transactional
     void saveMemberSchedule() {
 
         String startTime = "2024-04-09 08:30:00";
@@ -67,23 +67,23 @@ class MemberScheduleServiceTest {
         DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime end = LocalDateTime.parse(endTime, formatter2);
 
-        MemberScheduleDTO memberScheduleDTO = new MemberScheduleDTO(start, end, 3, 1);
+        MemberScheduleDTO memberScheduleDTO = new MemberScheduleDTO(start, end, 6, 2);
 
         memberScheduleService.saveMemberSchedule(memberScheduleDTO);
 
-        assertNotNull(memberScheduleService.findMemberScheduleByStudyclubIdAndMemberId(1, 3));
+        assertNotNull(memberScheduleService.findMemberScheduleByStudyclubIdAndMemberId(6, 2));
     }
 
     @Test
     @DisplayName("일정 수정")
     @Transactional
     void modifyMemberSchedule() {
-        String startTime = "2024-04-09 17:30:00";
-        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("EEE MMM dd yyyy HH:mm:ss 'GMT'Z '('z')'");
+        String startTime = "2024-04-09 16:30:00";
+        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime start = LocalDateTime.parse(startTime, formatter1);
 
         String endTime = "2024-04-09 19:30:00";
-        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("EEE MMM dd yyyy HH:mm:ss 'GMT'Z '('z')'");
+        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime end = LocalDateTime.parse(endTime, formatter2);
 
         MemberScheduleDTO memberScheduleDTO = new MemberScheduleDTO(14, start, end);
