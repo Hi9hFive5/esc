@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-04-12T14:30:54+0900",
+    date = "2024-04-15T15:52:08+0900",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.3 (ojdkbuild)"
 )
 @Component
@@ -29,5 +29,23 @@ public class StudyclubLogMapperImpl implements StudyclubLogMapper {
         studyclubLog.scheduleId( studyclubLogDTOData.getScheduleId() );
 
         return studyclubLog.build();
+    }
+
+    @Override
+    public StudyclubLogDTO studyclubLogTostudyclubLogDTO(StudyclubLog studyclubLog) {
+        if ( studyclubLog == null ) {
+            return null;
+        }
+
+        StudyclubLogDTO.StudyclubLogDTOBuilder studyclubLogDTO = StudyclubLogDTO.builder();
+
+        studyclubLogDTO.id( studyclubLog.getId() );
+        studyclubLogDTO.content( studyclubLog.getContent() );
+        studyclubLogDTO.studydate( studyclubLog.getStudydate() );
+        studyclubLogDTO.enrolldate( studyclubLog.getEnrolldate() );
+        studyclubLogDTO.studyclubId( studyclubLog.getStudyclubId() );
+        studyclubLogDTO.scheduleId( studyclubLog.getScheduleId() );
+
+        return studyclubLogDTO.build();
     }
 }

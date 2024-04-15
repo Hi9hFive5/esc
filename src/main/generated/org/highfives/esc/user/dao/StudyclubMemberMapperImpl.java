@@ -1,13 +1,13 @@
-package org.highfives.esc.User.dao;
+package org.highfives.esc.user.dao;
 
 import javax.annotation.processing.Generated;
-import org.highfives.esc.User.dto.StudyclubMemberDTO;
-import org.highfives.esc.User.entity.StudyclubMember;
+import org.highfives.esc.user.dto.StudyclubMemberDTO;
+import org.highfives.esc.user.entity.StudyclubMember;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-04-12T14:30:54+0900",
+    date = "2024-04-15T15:52:12+0900",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.3 (ojdkbuild)"
 )
 @Component
