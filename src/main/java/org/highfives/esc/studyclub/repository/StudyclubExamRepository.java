@@ -12,7 +12,6 @@ import java.util.Optional;
 @Repository
 public interface StudyclubExamRepository extends JpaRepository<StudyclubExam, Integer> {
 
-
     @Query("SELECT studyclubExam FROM StudyclubExam studyclubExam WHERE studyclubExam.clubId = :clubId")
     StudyclubExam findByClubId(@Param("clubId") int clubId);
 }

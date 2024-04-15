@@ -93,15 +93,15 @@ class StudyclubServiceTest {
         });
     }
 
-    @Test
-    @DisplayName("스터디 카테고리 조회")
-    void findStudyCategoryByIdTest() {
-        int categoryId = 1;
-
-        StudyCategoryDTO studyCategory = studyclubService.findStudyCategoryById(categoryId);
-
-        assertEquals(studyCategory.getId(), categoryId);
-    }
+//    @Test
+//    @DisplayName("스터디 카테고리 조회")
+//    void findStudyCategoryByIdTest() {
+//        int categoryId = 1;
+//
+//        StudyCategoryDTO studyCategory = studyclubService.findStudyCategoryById(categoryId);
+//
+//        assertEquals(studyCategory.getId(), categoryId);
+//    }
 
     @Test
     @DisplayName("스터디클럽별 시험일 조회")

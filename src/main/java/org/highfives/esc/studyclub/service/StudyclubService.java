@@ -9,10 +9,7 @@ import org.highfives.esc.studyclub.dto.GoalDTO;
 import org.highfives.esc.studyclub.dto.StudyCategoryDTO;
 import org.highfives.esc.studyclub.dto.StudyclubDTO;
 import org.highfives.esc.studyclub.dto.StudyclubExamDTO;
-import org.highfives.esc.studyclub.entity.Goal;
-import org.highfives.esc.studyclub.entity.StudyCategory;
-import org.highfives.esc.studyclub.entity.Studyclub;
-import org.highfives.esc.studyclub.entity.StudyclubExam;
+import org.highfives.esc.studyclub.entity.*;
 import org.highfives.esc.studyclub.repository.GoalRepository;
 import org.highfives.esc.studyclub.repository.StudyCategoryRepository;
 import org.highfives.esc.studyclub.repository.StudyclubExamRepository;
@@ -104,11 +101,6 @@ public class StudyclubService {
 
         studyclubExamRepository.save(studyclubExam);
 
-        studyclubGoal.setClubId(studyclub.getId());
-        studyclubGoal.setGoalId(studyclubVO.getGoalId());
-
-        studyclubGoalRepository.save(studyclubGoal);
-
         return mapper.map(studyclub, StudyclubDTO.class);
     }
 
@@ -125,12 +117,6 @@ public class StudyclubService {
 
         studyclubExam.setExamId(studyclubVO.getExamId());
         studyclubExam.setGoalId(studyclubVO.getGoalId());
-
-        studyclub.setStudyId(studyclubVO.getStudyId());
-
-        StudyclubGoal studyclubGoal = studyclubGoalRepository.findByClubId(studyclubId);
-
-        studyclubGoal.setGoalId(studyclubVO.getGoalId());
 
         return mapper.map(studyclub, StudyclubDTO.class);
     }
