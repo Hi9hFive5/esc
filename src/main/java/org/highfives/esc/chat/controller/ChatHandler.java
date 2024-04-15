@@ -1,6 +1,8 @@
 package org.highfives.esc.chat.controller;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.highfives.esc.chat.dto.ChatRoomDTO;
 import org.highfives.esc.chat.service.ChatRoomService;
@@ -24,12 +26,15 @@ public class ChatHandler extends TextWebSocketHandler {
 
 //    private final Set<WebSocketSession> sessions = new HashSet<>();
     private final ChatRoomManager chatRoomManager;
-
+    private final ObjectMapper objectMapper;
 //    private Set<WebSocketSession> sessions = new HashSet<>();
 
     @Autowired
-    public ChatHandler(ChatRoomManager chatRoomManager) {
+    public ChatHandler(ChatRoomManager chatRoomManager,
+                       ObjectMapper objectMapper) {
+
         this.chatRoomManager = chatRoomManager;
+        this.objectMapper = objectMapper;
     }
 
     @Override
@@ -55,8 +60,16 @@ public class ChatHandler extends TextWebSocketHandler {
 
         System.out.println("message = " + message.getPayload());
 
+        JsonNode jsonNode = objectMapper.readTree(message.getPayload());
+        JsonNode messageNode = jsonNode.get(0);
         int roomId = getRoomId(session);
         ChatRoomDTO room = chatRoomManager.chatRoom(roomId);
+
+        ((ObjectNode) messageNode).put("sessionNo", room.getSessions().size());
+        String updatedPayload = objectMapper.writeValueAsString(jsonNode);
+        System.out.println("updatedPayload = " + updatedPayload);
+        message = new TextMessage(updatedPayload);
+        System.out.println("message = " + message.getPayload());
 
         for (WebSocketSession connectedSession : room.getSessions()) {
             if(!connectedSession.getId().equals(session.getId()))
