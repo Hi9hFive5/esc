@@ -101,7 +101,7 @@ public class UserController {
         return ResponseEntity.ok().body(userDTO);
     }
 
-    /* 설명. 프로젝트 참여 회원 이름 조회 */
+    /* 설명. 스터디 참여 회원 이름 조회 */
     @GetMapping("/findJoinMemberAndName/{studyclub_id}")
     public ResponseEntity<List<UserInfoDTO>> findJoinMemberAndNameById(@PathVariable("studyclub_id") String studyclubId){
 
