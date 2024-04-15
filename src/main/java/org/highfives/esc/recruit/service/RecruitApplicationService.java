@@ -111,4 +111,11 @@ public class RecruitApplicationService {
 
         recruitApplicationRepository.deleteById(applyId);
     }
+
+    public RecruitApplicationDTO findByBothId(int postId, int userId) {
+
+        RecruitApplication recruitApplication = recruitApplicationRepository.findByBothId(postId, userId);
+
+        return mapper.map(recruitApplication, RecruitApplicationDTO.class);
+    }
 }
