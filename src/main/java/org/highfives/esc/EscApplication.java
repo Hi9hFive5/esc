@@ -13,8 +13,6 @@ public class EscApplication {
     }
 
     @Bean
-    public static ModelMapper modelMapper() {
-        return new ModelMapper();
-    }
+    public ModelMapper getModelMapper() { return new ModelMapper(); }
 
 }
