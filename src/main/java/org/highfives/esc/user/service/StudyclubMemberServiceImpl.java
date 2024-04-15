@@ -1,10 +1,10 @@
-package org.highfives.esc.User.service;
+package org.highfives.esc.user.service;
 
 import lombok.extern.slf4j.Slf4j;
-import org.highfives.esc.User.dao.StudyclubMemberMapper;
-import org.highfives.esc.User.dto.StudyclubMemberDTO;
-import org.highfives.esc.User.entity.StudyclubMember;
-import org.highfives.esc.User.repository.StudyclubMemberRepository;
+import org.highfives.esc.user.dao.StudyclubMemberMapper;
+import org.highfives.esc.user.dto.StudyclubMemberDTO;
+import org.highfives.esc.user.entity.StudyclubMember;
+import org.highfives.esc.user.repository.StudyclubMemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

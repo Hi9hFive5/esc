@@ -1,12 +1,12 @@
-package org.highfives.esc.User.service;
+package org.highfives.esc.user.service;
 
 import lombok.extern.slf4j.Slf4j;
-import org.highfives.esc.User.dao.UserMapper;
-import org.highfives.esc.User.dto.StudyclubMemberDTO;
-import org.highfives.esc.User.dto.UserDTO;
-import org.highfives.esc.User.entity.StudyclubMember;
-import org.highfives.esc.User.entity.User;
-import org.highfives.esc.User.repository.UserRepository;
+import org.highfives.esc.user.dao.UserMapper;
+import org.highfives.esc.user.dto.StudyclubInfoDTO;
+import org.highfives.esc.user.dto.UserDTO;
+import org.highfives.esc.user.dto.UserInfoDTO;
+import org.highfives.esc.user.entity.User;
+import org.highfives.esc.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -91,13 +91,17 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public List<StudyclubMemberDTO> findJoinStudyClubById(String id) {
-        List<StudyclubMember> studyclubMembers = userRepository.findJoinStudyClubById(id);
+    public List<StudyclubInfoDTO> findJoinStudyClubById(String memberId) {
 
-        List <StudyclubMemberDTO> studyclubMemberDTO = userMapper.studyclubMemberToStudyclubMemberDTO(studyclubMembers);
+        List<StudyclubInfoDTO> studyclubInfoDTOList = userRepository.findJoinStudyClubById(memberId);
 
-        return studyclubMemberDTO;
+
+
+
+        return studyclubInfoDTOList;
     }
+
+
 
     @Override
     public UserDTO getUserPoint(UserDTO userDTOdata) {
@@ -175,5 +179,15 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
 
         return userDTOData;
+    }
+
+    @Override
+    public List<UserInfoDTO> findJoinMemberAndNameById(String studyclubId) {
+
+        List<UserInfoDTO> userinfoDTO = userRepository.findJoinMemberAndNameById(studyclubId);
+
+        log.info("반환값={}",userinfoDTO);
+
+        return userinfoDTO;
     }
 }

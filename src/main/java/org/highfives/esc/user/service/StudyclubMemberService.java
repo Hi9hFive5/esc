@@ -1,7 +1,6 @@
-package org.highfives.esc.User.service;
+package org.highfives.esc.user.service;
 
-import jakarta.transaction.Transactional;
-import org.highfives.esc.User.dto.StudyclubMemberDTO;
+import org.highfives.esc.user.dto.StudyclubMemberDTO;
 
 public interface StudyclubMemberService {
 
@@ -10,4 +9,5 @@ public interface StudyclubMemberService {
 
 
     void deleteByMemberIdAndStudyclubId(String memberId, String studyclubId);
+
 }

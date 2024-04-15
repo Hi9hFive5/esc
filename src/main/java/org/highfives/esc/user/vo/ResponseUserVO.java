@@ -1,4 +1,4 @@
-package org.highfives.esc.User.vo;
+package org.highfives.esc.user.vo;
 
 import lombok.Data;
 

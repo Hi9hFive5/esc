@@ -1,7 +1,7 @@
-package org.highfives.esc.User.repository;
+package org.highfives.esc.user.repository;
 
 import jakarta.transaction.Transactional;
-import org.highfives.esc.User.entity.StudyclubMember;
+import org.highfives.esc.user.entity.StudyclubMember;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

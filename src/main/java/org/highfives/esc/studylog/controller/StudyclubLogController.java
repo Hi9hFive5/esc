@@ -1,11 +1,14 @@
 package org.highfives.esc.studylog.controller;
 
 import org.highfives.esc.studylog.dto.StudyclubLogDTO;
+import org.highfives.esc.studylog.dto.StudyclubLogInfoDTO;
+import org.highfives.esc.studylog.dto.StudyclubLogMemberInfoDTO;
 import org.highfives.esc.studylog.service.StudyclubLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/studyLog")
@@ -44,5 +47,32 @@ public class StudyclubLogController {
         studyclubLogService.deleteStudyLog(id);
 
         return "ok";
+    }
+
+    /* 설명. 스터디 로그 조회 기능 */
+    @GetMapping("/find/{id}")
+    public ResponseEntity<StudyclubLogDTO> findStudyLogById(@PathVariable String id) throws IllegalAccessException {
+
+        StudyclubLogDTO studyclubLogDTO = studyclubLogService.findStudyLogById(id);
+
+        return ResponseEntity.ok().body(studyclubLogDTO);
+    }
+
+    /* 설명. 스터디 그룹 작성 된 로그 조회 기능 */
+    @GetMapping("/findStudyclubLog/{studyclub_id}")
+    public ResponseEntity<List<StudyclubLogInfoDTO>> findStudyclubLogById(@PathVariable("studyclub_id") String studyclubId){
+
+        List<StudyclubLogInfoDTO> studyclubLogDTO = studyclubLogService.findStudyclubLogById(studyclubId);
+
+        return ResponseEntity.ok().body(studyclubLogDTO);
+    }
+
+    /* 설명. 작성한 로그 확인 기능 */
+    @GetMapping("/findWritingStudyclubLogById/{id}")
+    public ResponseEntity<List<StudyclubLogMemberInfoDTO>> findWritingStudyclubLogById(@PathVariable("id") String id){
+
+        List<StudyclubLogMemberInfoDTO> studyclubLogDTO = studyclubLogService.findWritingStudyclubLogById(id);
+
+        return ResponseEntity.ok().body(studyclubLogDTO);
     }
 }
