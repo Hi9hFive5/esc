@@ -1,5 +1,6 @@
 package org.highfives.esc.recruit.repository;
 
+import org.highfives.esc.recruit.dto.RecruitApplicationDTO;
 import org.highfives.esc.recruit.dto.RecuitApplicationInfoDTO;
 import org.highfives.esc.recruit.entity.RecruitApplication;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,4 +19,6 @@ public interface RecruitApplicationRepository extends JpaRepository<RecruitAppli
     @Query("SELECT apply FROM RecruitApplication apply WHERE apply.recruitUserId = :recruitUserId")
     List<RecruitApplication> findAllByUserId(@Param("recruitUserId") int recruitUserId);
 
+    @Query("SELECT apply FROM RecruitApplication apply WHERE apply.recruitPostId = :postId AND apply.recruitUserId = :userId")
+    RecruitApplication findByBothId(@Param("postId") int postId, @Param("userId") int userId);
 }

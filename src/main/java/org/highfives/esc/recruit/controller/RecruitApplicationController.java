@@ -45,6 +45,14 @@ public class RecruitApplicationController {
         return ResponseEntity.ok().body(recruitApplication);
     }
 
+    @GetMapping("/applyId/{postId}/{userId}")
+    public ResponseEntity<RecruitApplicationDTO> findByBothId(@PathVariable int postId, @PathVariable int userId) {
+
+        RecruitApplicationDTO recruitApplication = recruitApplicationService.findByBothId(postId, userId);
+
+        return ResponseEntity.ok().body(recruitApplication);
+    }
+
     // 모집글 신청 수락
     @PutMapping("/accept/{applyId}")
     public ResponseEntity<RecruitApplicationDTO> acceptApplication(@PathVariable int applyId) {
