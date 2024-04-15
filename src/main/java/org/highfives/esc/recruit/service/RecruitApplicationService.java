@@ -1,6 +1,7 @@
 package org.highfives.esc.recruit.service;
 
 import org.highfives.esc.recruit.dto.RecruitApplicationDTO;
+import org.highfives.esc.recruit.dto.RecuitApplicationInfoDTO;
 import org.highfives.esc.recruit.entity.RecruitApplication;
 import org.highfives.esc.recruit.entity.RecruitPost;
 import org.highfives.esc.recruit.repository.RecruitApplicationRepository;
@@ -32,16 +33,15 @@ public class RecruitApplicationService {
     }
 
     @Transactional(readOnly = true)
-    public List<RecruitApplicationDTO> findAllByRecruitId(int recruitId) {
+    public List<RecuitApplicationInfoDTO> findAllByRecruitId(int recruitPostId) {
 
-        List<RecruitApplication> recruitApplicationList = recruitApplicationRepository.findAllByRecruitId(recruitId);
-        List<RecruitApplicationDTO> recruitApplicationDTOList = new ArrayList<>();
 
-        for (RecruitApplication recruitApplication : recruitApplicationList) {
-            recruitApplicationDTOList.add(mapper.map(recruitApplication, RecruitApplicationDTO.class));
-        }
+    List<RecuitApplicationInfoDTO> recruitApplicationList = recruitApplicationRepo.findAllByRecruitId(recruitPostId);
 
-        return recruitApplicationDTOList;
+
+
+
+        return recruitApplicationList;
     }
 
     @Transactional(readOnly = true)

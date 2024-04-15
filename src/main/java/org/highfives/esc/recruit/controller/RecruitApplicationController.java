@@ -1,6 +1,7 @@
 package org.highfives.esc.recruit.controller;
 
 import org.highfives.esc.recruit.dto.RecruitApplicationDTO;
+import org.highfives.esc.recruit.dto.RecuitApplicationInfoDTO;
 import org.highfives.esc.recruit.service.RecruitApplicationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,10 +19,10 @@ public class RecruitApplicationController {
     }
 
     // 모집글 아이디로 모집글 신청 리스트 조회
-    @GetMapping("/post/{recruitId}")
-    public ResponseEntity<List<RecruitApplicationDTO>> findAllByRecruitId(@PathVariable int recruitId) {
+    @GetMapping("/post/{recruitPostId}")
+    public ResponseEntity<List<RecuitApplicationInfoDTO>> findAllByRecruitId(@PathVariable int recruitPostId) {
 
-        List<RecruitApplicationDTO> recruitApplication = recruitApplicationService.findAllByRecruitId(recruitId);
+        List<RecuitApplicationInfoDTO> recruitApplication = recruitApplicationService.findAllByRecruitId(recruitPostId);
 
         return ResponseEntity.ok().body(recruitApplication);
     }
