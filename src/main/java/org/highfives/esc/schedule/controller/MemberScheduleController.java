@@ -1,6 +1,7 @@
 package org.highfives.esc.schedule.controller;
 
 import org.highfives.esc.schedule.dto.MemberScheduleDTO;
+import org.highfives.esc.schedule.entity.MemberSchedule;
 import org.highfives.esc.schedule.service.MemberScheduleService;
 import org.highfives.esc.schedule.vo.RequestMemberScheduleListVO;
 import org.highfives.esc.schedule.vo.RequestMemberScheduleVO;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/member-schedule")
@@ -74,6 +76,30 @@ public class MemberScheduleController {
         ResponseMemberScheduleListVO response = new ResponseMemberScheduleListVO();
 
         ArrayList<MemberScheduleDTO> memberScheduleDTOList = memberScheduleService.findMemberScheduleByStudyclubId(studyclubId);
+        ArrayList<ResponseMemberScheduleVO> responseMemberScheduleVOList = new ArrayList<>();
+
+        for (MemberScheduleDTO memberScheduleDTO: memberScheduleDTOList){
+            responseMemberScheduleVOList.add(mapper.map(memberScheduleDTO, ResponseMemberScheduleVO.class));
+        }
+
+        response.setMessage("조회 성공");
+        response.setMemberSchedules(responseMemberScheduleVOList);
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    /* 설명. studyclub id로 조회해서 겹치는 시간 반환 */
+    @GetMapping("overlap/{studyclubId}")
+    public ResponseEntity<ResponseMemberScheduleListVO> findOverlapping(
+            @PathVariable("studyclubId") int studyclubId) {
+
+        ResponseMemberScheduleListVO response = new ResponseMemberScheduleListVO();
+
+        List<MemberScheduleDTO> memberScheduleDTOList = memberScheduleService.findOverlapMemberSchedulesByStudyclubId(studyclubId);
+
+        // 겹치는 시간을 저장할 리스트
+        List<MemberScheduleDTO> overlapSchedules = new ArrayList<>();
+
         ArrayList<ResponseMemberScheduleVO> responseMemberScheduleVOList = new ArrayList<>();
 
         for (MemberScheduleDTO memberScheduleDTO: memberScheduleDTOList){
