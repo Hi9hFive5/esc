@@ -15,8 +15,9 @@ public class StudyclubVO {
 
     private int memberLimit;
 
-    private String endDate;
-
     private int studyId;
 
+    private int examId;
+
+    private int goalId;
 }

@@ -2,7 +2,11 @@ package org.highfives.esc.recruit.service;
 
 import org.highfives.esc.recruit.dto.RecruitApplicationDTO;
 import org.highfives.esc.recruit.entity.RecruitApplication;
-import org.highfives.esc.recruit.repository.RecruitApplicationRepo;
+import org.highfives.esc.recruit.entity.RecruitPost;
+import org.highfives.esc.recruit.repository.RecruitApplicationRepository;
+import org.highfives.esc.recruit.repository.RecruitPostRepository;
+import org.highfives.esc.studyclub.entity.Studyclub;
+import org.highfives.esc.studyclub.repository.StudyclubRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,19 +19,22 @@ import java.util.List;
 public class RecruitApplicationService {
 
     private final ModelMapper mapper;
-
-    private final RecruitApplicationRepo recruitApplicationRepo;
+    private final RecruitApplicationRepository recruitApplicationRepository;
+    private final RecruitPostRepository recruitPostRepository;
+    private final StudyclubRepository studyclubRepository;
 
     @Autowired
-    public RecruitApplicationService(ModelMapper mapper, RecruitApplicationRepo recruitApplicationRepo) {
+    public RecruitApplicationService(ModelMapper mapper, RecruitApplicationRepository recruitApplicationRepository, RecruitPostRepository recruitPostRepository, StudyclubRepository studyclubRepository) {
         this.mapper = mapper;
-        this.recruitApplicationRepo = recruitApplicationRepo;
+        this.recruitApplicationRepository = recruitApplicationRepository;
+        this.recruitPostRepository = recruitPostRepository;
+        this.studyclubRepository = studyclubRepository;
     }
 
     @Transactional(readOnly = true)
     public List<RecruitApplicationDTO> findAllByRecruitId(int recruitId) {
 
-        List<RecruitApplication> recruitApplicationList = recruitApplicationRepo.findAllByRecruitId(recruitId);
+        List<RecruitApplication> recruitApplicationList = recruitApplicationRepository.findAllByRecruitId(recruitId);
         List<RecruitApplicationDTO> recruitApplicationDTOList = new ArrayList<>();
 
         for (RecruitApplication recruitApplication : recruitApplicationList) {
@@ -40,7 +47,7 @@ public class RecruitApplicationService {
     @Transactional(readOnly = true)
     public List<RecruitApplicationDTO> findAllByUserId(int userId) {
 
-        List<RecruitApplication> recruitApplicationList = recruitApplicationRepo.findAllByUserId(userId);
+        List<RecruitApplication> recruitApplicationList = recruitApplicationRepository.findAllByUserId(userId);
         List<RecruitApplicationDTO> recruitApplicationDTOList = new ArrayList<>();
 
         for (RecruitApplication recruitApplication : recruitApplicationList) {
@@ -48,6 +55,13 @@ public class RecruitApplicationService {
         }
 
         return recruitApplicationDTOList;
+    }
+
+    public RecruitApplicationDTO findById(int applyId) {
+
+        RecruitApplication recruitApplication = recruitApplicationRepository.findById(applyId).orElseThrow(IllegalArgumentException::new);
+
+        return mapper.map(recruitApplication, RecruitApplicationDTO.class);
     }
 
     @Transactional
@@ -59,7 +73,7 @@ public class RecruitApplicationService {
         recruitApplication.setRecruitUserId(userId);
         recruitApplication.setRecruitPostId(postId);
 
-        recruitApplicationRepo.save(recruitApplication);
+        recruitApplicationRepository.save(recruitApplication);
 
         return mapper.map(recruitApplication, RecruitApplicationDTO.class);
     }
@@ -67,9 +81,17 @@ public class RecruitApplicationService {
     @Transactional
     public RecruitApplicationDTO acceptApplication(int applyId) {
 
-        RecruitApplication recruitApplication = recruitApplicationRepo.findById(applyId).orElseThrow(IllegalArgumentException::new);
+        RecruitApplication recruitApplication = recruitApplicationRepository.findById(applyId).orElseThrow(IllegalArgumentException::new);
 
         recruitApplication.setRecruitStatus("수락");
+
+        RecruitPost recruitPost = recruitPostRepository.findById(recruitApplication.getRecruitPostId()).orElseThrow(IllegalArgumentException::new);
+        Studyclub studyclub = studyclubRepository.findById(recruitPost.getClubId()).orElseThrow(IllegalArgumentException::new);
+
+        if(studyclub.getMemberCount() < studyclub.getMemberLimit()) {
+            studyclub.setMemberCount(studyclub.getMemberCount() + 1);
+        }
+        else recruitPost.setRecruitStatus("Y");
 
         return mapper.map(recruitApplication, RecruitApplicationDTO.class);
     }
@@ -77,7 +99,7 @@ public class RecruitApplicationService {
     @Transactional
     public RecruitApplicationDTO rejectApplication(int applyId) {
 
-        RecruitApplication recruitApplication = recruitApplicationRepo.findById(applyId).orElseThrow(IllegalArgumentException::new);
+        RecruitApplication recruitApplication = recruitApplicationRepository.findById(applyId).orElseThrow(IllegalArgumentException::new);
 
         recruitApplication.setRecruitStatus("거절");
 
@@ -87,6 +109,6 @@ public class RecruitApplicationService {
     @Transactional
     public void deleteApplication(int applyId) {
 
-        recruitApplicationRepo.deleteById(applyId);
+        recruitApplicationRepository.deleteById(applyId);
     }
 }

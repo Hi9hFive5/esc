@@ -1,11 +1,7 @@
 package org.highfives.esc.studyclub.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,6 +13,7 @@ import org.hibernate.annotations.ColumnDefault;
 public class Studyclub {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
@@ -35,13 +32,8 @@ public class Studyclub {
     @Column(name = "member_limit")
     private int memberLimit;
 
-    @Column(name = "end_date")
-    private String endDate;
-
     @Column(name = "leader_id")
     private int leaderId;
 
-    @Column(name = "study_id")
-    private int studyId;
-
 }
+
