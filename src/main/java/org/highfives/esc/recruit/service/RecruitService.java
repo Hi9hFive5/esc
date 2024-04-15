@@ -112,7 +112,6 @@ public class RecruitService {
 
         recruitPost.setDeleteStatus("Y");
 
-
         return mapper.map(recruitPost, RecruitPostDTO.class);
     }
 }

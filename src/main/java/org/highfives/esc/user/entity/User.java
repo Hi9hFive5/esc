@@ -1,9 +1,16 @@
 package org.highfives.esc.user.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Table(name = "user")
+@Getter
+@NoArgsConstructor
+@ToString
 public class User {
 
     @Id
@@ -16,7 +23,7 @@ public class User {
     private String email;
     @Column(name = "nickname", length = 20, nullable = false)
     private String nickname;
-    @Column(name = "status", length = 1, nullable = false)
+    @Column(name = "status", length = 1)
     private String status;
     @Column(name = "password", length = 50, nullable = false)
     private String password;
@@ -27,8 +34,19 @@ public class User {
     @Column(name = "point")
     private int point;
     @Column(name = "end_date")
-    private java.util.Date endDate;
+    private String endDate;
 
-
-
+    @Builder
+    public User(int id, String name, String email, String nickname, String status, String password, int reportCount, int grade, int point, String endDate) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.nickname = nickname;
+        this.status = status;
+        this.password = password;
+        this.reportCount = reportCount;
+        this.grade = grade;
+        this.point = point;
+        this.endDate = endDate;
+    }
 }

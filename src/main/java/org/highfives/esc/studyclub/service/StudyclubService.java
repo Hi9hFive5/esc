@@ -86,6 +86,9 @@ public class StudyclubService {
         Studyclub studyclub = new Studyclub();
         StudyclubExam studyclubExam = new StudyclubExam();
 
+        StudyclubGoal studyclubGoal = new StudyclubGoal();
+
+
         studyclub.setName(studyclubVO.getName());
         studyclub.setIntroduce(studyclubVO.getIntroduce());
         studyclub.setMemberLimit(studyclubVO.getMemberLimit());
@@ -100,6 +103,11 @@ public class StudyclubService {
         studyclubExam.setGoalId(studyclubVO.getGoalId());
 
         studyclubExamRepository.save(studyclubExam);
+
+        studyclubGoal.setClubId(studyclub.getId());
+        studyclubGoal.setGoalId(studyclubVO.getGoalId());
+
+        studyclubGoalRepository.save(studyclubGoal);
 
         return mapper.map(studyclub, StudyclubDTO.class);
     }
@@ -117,6 +125,12 @@ public class StudyclubService {
 
         studyclubExam.setExamId(studyclubVO.getExamId());
         studyclubExam.setGoalId(studyclubVO.getGoalId());
+
+        studyclub.setStudyId(studyclubVO.getStudyId());
+
+        StudyclubGoal studyclubGoal = studyclubGoalRepository.findByClubId(studyclubId);
+
+        studyclubGoal.setGoalId(studyclubVO.getGoalId());
 
         return mapper.map(studyclub, StudyclubDTO.class);
     }

@@ -21,3 +21,4 @@ public class StudyclubVO {
 
     private int goalId;
 }
+

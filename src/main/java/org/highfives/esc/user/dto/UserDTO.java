@@ -1,10 +1,11 @@
 package org.highfives.esc.user.dto;
 
 
-import jakarta.persistence.Column;
-import lombok.Data;
+import lombok.*;
 
-@Data
+@Getter
+@NoArgsConstructor
+@ToString
 public class UserDTO {
     private int id;
 
@@ -18,12 +19,25 @@ public class UserDTO {
 
     private String password;
 
-    private int report_count;
+    private int reportCount;
 
     private int grade;
 
     private int point;
 
-    private java.util.Date end_date;
+    private String endDate;
 
+    @Builder
+    public UserDTO(int id, String name, String email, String nickname, String status, String password, int report_count, int grade, int point, String end_date) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.nickname = nickname;
+        this.status = status;
+        this.password = password;
+        this.reportCount = report_count;
+        this.grade = grade;
+        this.point = point;
+        this.endDate = end_date;
+    }
 }
