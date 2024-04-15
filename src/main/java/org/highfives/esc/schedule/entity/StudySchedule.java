@@ -32,7 +32,7 @@ public class StudySchedule {
     private LocalDateTime endDatetime;      // 일정 종료 시간
 
     @Column(name = "use_status")
-    private char useState;                  // 일정 삭제 여부
+    private char useStatus;                  // 일정 삭제 여부
 
     @Column(name = "schedule_writer_id")
     private int writerId;                   // 일정 작성 멤버(리더)
@@ -40,12 +40,12 @@ public class StudySchedule {
     @Column(name = "studyclub_id")
     private int studyclubId;                // 해당 스터디클럽
 
-    public StudySchedule(String title, String content, LocalDateTime startDatetime, LocalDateTime endDatetime, char useState, int writerId, int studyclubId) {
+    public StudySchedule(String title, String content, LocalDateTime startDatetime, LocalDateTime endDatetime, char useStatus, int writerId, int studyclubId) {
         this.title = title;
         this.content = content;
         this.startDatetime = startDatetime;
         this.endDatetime = endDatetime;
-        this.useState = useState;
+        this.useStatus = useStatus;
         this.writerId = writerId;
         this.studyclubId = studyclubId;
     }
