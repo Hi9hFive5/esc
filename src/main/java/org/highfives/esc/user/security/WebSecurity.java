@@ -54,7 +54,7 @@ public class WebSecurity {
                                 .requestMatchers(new AntPathRequestMatcher("/**", "GET")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/**", "PUT")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/**", "DELETE")).permitAll()
-                                .requestMatchers(new AntPathRequestMatcher("/metric")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/metrics")).permitAll()
                                 .anyRequest().authenticated()
                 )
                 .authenticationManager(authenticationManager)
