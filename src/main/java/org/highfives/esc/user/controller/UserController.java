@@ -143,7 +143,6 @@ public class UserController {
 
         List<StudyclubInfoDTO> studyclubMemberDTO = userService.findJoinStudyClubById(memberId);
 
-
         return ResponseEntity.ok().body(studyclubMemberDTO);
     }
 

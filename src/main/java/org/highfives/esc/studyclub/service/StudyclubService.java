@@ -140,6 +140,15 @@ public class StudyclubService {
         return mapper.map(studyCategory, StudyCategoryDTO.class);
     }
 
+    public StudyCategoryDTO findStudyCategoryByClubId(int clubId) {
+
+        StudyclubExam studyclubExam = studyclubExamRepository.findByClubId(clubId);
+        Goal goal = goalRepository.findById(studyclubExam.getGoalId()).orElseThrow(IllegalArgumentException:: new);
+        StudyCategoryDTO studyCategory = findStudyCategoryById(goal.getStudyId());
+
+        return studyCategory;
+    }
+
     public StudyclubExamDTO findStudyclubExamById(int clubId) {
 
         StudyclubExam studyclubExam = studyclubExamRepository.findByClubId(clubId);

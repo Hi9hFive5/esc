@@ -74,21 +74,21 @@ public class StudyclubController {
         return ResponseEntity.ok().body(studyCategoryList);
     }
 
-    @GetMapping("/category/{studyId}")
-    public ResponseEntity<StudyCategoryDTO> findStudyCategoryById(@PathVariable("studyId") int studyId) {
+    @GetMapping("/category/{categoryId}")
+    public ResponseEntity<StudyCategoryDTO> findStudyCategoryById(@PathVariable("categoryId") int categoryId) {
 
-        StudyCategoryDTO studyCategory= studyclubService.findStudyCategoryById(studyId);
+        StudyCategoryDTO studyCategory= studyclubService.findStudyCategoryById(categoryId);
 
         return ResponseEntity.ok().body(studyCategory);
     }
 
-    // @GetMapping("/category/{categoryId}")
-    // public ResponseEntity<StudyCategoryDTO> findStudyCategoryById(@PathVariable int categoryId) {
+    @GetMapping("/study-category/{studyId}")
+    public ResponseEntity<StudyCategoryDTO> findStudyCategoryByClubId(@PathVariable("clubId") int clubId) {
 
-    //     StudyCategoryDTO studyCategory= studyclubService.findStudyCategoryById(categoryId);
+        StudyCategoryDTO studyCategory= studyclubService.findStudyCategoryById(clubId);
 
-    //     return ResponseEntity.ok().body(studyCategory);
-    // }
+        return ResponseEntity.ok().body(studyCategory);
+    }
 
     // 스터디 카테고리별 시험일 목록 조회
     @GetMapping("/exam/{studyId}")

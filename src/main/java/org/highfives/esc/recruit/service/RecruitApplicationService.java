@@ -99,8 +99,6 @@ public class RecruitApplicationService {
         }
         else recruitPost.setRecruitStatus("Y");
 
-
-
         return mapper.map(recruitApplication, RecruitApplicationDTO.class);
     }
 

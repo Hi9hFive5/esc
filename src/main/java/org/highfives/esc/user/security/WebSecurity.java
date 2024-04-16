@@ -83,6 +83,8 @@ public class WebSecurity {
                                 .requestMatchers(new AntPathRequestMatcher("/studyclubMember/**", "PUT")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/chat/room/**")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/chat/**")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/**", "POST")).permitAll()
+
 //
 
 //                .requestMatchers("/**").access(
