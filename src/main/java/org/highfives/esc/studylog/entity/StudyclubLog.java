@@ -20,8 +20,11 @@ public class StudyclubLog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "content", length = 2047, nullable = false)
+    @Column(name = "content", length = 255, nullable = false)
     private String content;
+
+    @Column(name = "content_info", nullable = false)
+    private String contentInfo;
 
     @Column(name = "studydate", length = 50, nullable = false)
     private String studydate;
@@ -36,9 +39,11 @@ public class StudyclubLog {
     private int scheduleId;
 
     @Builder
-    public StudyclubLog(int id, String content, String studydate, String enrolldate, int studyclubId, int scheduleId) {
+
+    public StudyclubLog(int id, String content, String contentInfo, String studydate, String enrolldate, int studyclubId, int scheduleId) {
         this.id = id;
         this.content = content;
+        this.contentInfo = contentInfo;
         this.studydate = studydate;
         this.enrolldate = enrolldate;
         this.studyclubId = studyclubId;

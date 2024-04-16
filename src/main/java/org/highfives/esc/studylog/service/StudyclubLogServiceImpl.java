@@ -47,6 +47,7 @@ public class StudyclubLogServiceImpl implements StudyclubLogService {
         StudyclubLogDTO studyclubLogDTO = StudyclubLogDTO.builder()
                 .id(studyclubLogDTOData.getId())
                 .content(studyclubLogDTOData.getContent())
+                .contentInfo(studyclubLogDTOData.getContentInfo())
                 .studydate(studyclubLogDTOData.getStudydate())
                 .enrolldate(studyclubLogDTOData.getEnrolldate())
                 .studyclubId(studyclubLogDTOData.getStudyclubId())
