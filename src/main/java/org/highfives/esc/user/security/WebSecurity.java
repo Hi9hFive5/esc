@@ -71,11 +71,15 @@ public class WebSecurity {
                                 .requestMatchers(new AntPathRequestMatcher("/studyLog/**", "POST")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/studyLog/**", "PUT")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/chat/room/**")).permitAll()
-                                .requestMatchers(new AntPathRequestMatcher("/member-schedule/**")).permitAll()
-                                .requestMatchers(new AntPathRequestMatcher("/study-schedule/**")).permitAll()
-//                                .requestMatchers(new AntPathRequestMatcher("/**", "POST")).permitAll()
-//                                .requestMatchers(new AntPathRequestMatcher("/**", "PUT")).permitAll()
-//                                .requestMatchers(new AntPathRequestMatcher("/**", "DELETE")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/member-schedule/**", "GET")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/member-schedule/**", "POST")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/member-schedule/**", "PUT")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/member-schedule/**", "DELETE")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/study-schedule/**", "GET")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/study-schedule/**", "POST")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/study-schedule/**", "PUT")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/study-schedule/**", "DELETE")).permitAll()
+//
 
 //                .requestMatchers("/**").access(
 //                        new WebExpressionAuthorizationManager("hasIpAddress('127.0.0.1') or hasIpAddress('192.168.0.26')"))

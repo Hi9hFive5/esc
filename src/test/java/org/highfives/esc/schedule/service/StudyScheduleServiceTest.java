@@ -67,7 +67,7 @@ class StudyScheduleServiceTest {
 
         studyScheduleService.saveStudySchedule(studyScheduleDTO, participantList);
 
-        assertNotNull(studyScheduleService.findStudyScheduleById(6));
+        assertNotNull(studyScheduleService.findStudyScheduleById(4));
     }
 
     @Test

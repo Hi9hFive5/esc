@@ -56,7 +56,6 @@ class MemberScheduleServiceTest {
 
     @Test
     @DisplayName("일정 추가")
-    @Transactional
     void saveMemberSchedule() {
 
         String startTime = "2024-04-09 08:30:00";
@@ -67,11 +66,11 @@ class MemberScheduleServiceTest {
         DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime end = LocalDateTime.parse(endTime, formatter2);
 
-        MemberScheduleDTO memberScheduleDTO = new MemberScheduleDTO(start, end, 6, 2);
+        MemberScheduleDTO memberScheduleDTO = new MemberScheduleDTO(start, end, 6, 6);
 
         memberScheduleService.saveMemberSchedule(memberScheduleDTO);
 
-        assertNotNull(memberScheduleService.findMemberScheduleByStudyclubIdAndMemberId(6, 2));
+        assertNotNull(memberScheduleService.findMemberScheduleByStudyclubIdAndMemberId(6, 6));
     }
 
     @Test
@@ -86,18 +85,20 @@ class MemberScheduleServiceTest {
         DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime end = LocalDateTime.parse(endTime, formatter2);
 
-        MemberScheduleDTO memberScheduleDTO = new MemberScheduleDTO(14, start, end);
+        int id = 5;
+
+        MemberScheduleDTO memberScheduleDTO = new MemberScheduleDTO(id, start, end);
 
         memberScheduleService.modifyMemberSchedule(memberScheduleDTO);
 
-        assertEquals(start, memberScheduleService.findMemberScheduleById(14).getStartDatetime());
+        assertEquals(start, memberScheduleService.findMemberScheduleById(id).getStartDatetime());
     }
 
     @Test
     @DisplayName("일정 삭제")
     @Transactional
     void removeMemberSchedule() {
-        int id = 14;
+        int id = 5;
 
         memberScheduleService.removeMemberSchedule(id);
 
