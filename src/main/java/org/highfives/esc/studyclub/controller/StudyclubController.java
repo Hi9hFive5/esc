@@ -82,10 +82,10 @@ public class StudyclubController {
         return ResponseEntity.ok().body(studyCategory);
     }
 
-    @GetMapping("/study-category/{studyId}")
+    @GetMapping("/study-category/{clubId}")
     public ResponseEntity<StudyCategoryDTO> findStudyCategoryByClubId(@PathVariable("clubId") int clubId) {
 
-        StudyCategoryDTO studyCategory= studyclubService.findStudyCategoryById(clubId);
+        StudyCategoryDTO studyCategory= studyclubService.findStudyCategoryByClubId(clubId);
 
         return ResponseEntity.ok().body(studyCategory);
     }
