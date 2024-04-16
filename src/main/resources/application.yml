@@ -27,3 +27,6 @@ token:
 jasypt:
   encryptor:
     bean: jasyptStringEncryptor
+
+server:
+  port: 10001 
