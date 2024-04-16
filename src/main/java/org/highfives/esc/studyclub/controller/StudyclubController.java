@@ -4,8 +4,6 @@ import org.highfives.esc.crawling.dto.ExamDTO;
 import org.highfives.esc.studyclub.dto.GoalDTO;
 import org.highfives.esc.studyclub.dto.StudyCategoryDTO;
 import org.highfives.esc.studyclub.dto.StudyclubDTO;
-import org.highfives.esc.studyclub.dto.StudyclubExamDTO;
-import org.highfives.esc.studyclub.entity.Goal;
 import org.highfives.esc.studyclub.service.StudyclubService;
 import org.highfives.esc.studyclub.vo.StudyclubVO;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +23,7 @@ public class StudyclubController {
 
     // 리더(회원) 아이디로 스터디클럽 리스트 조회
     @GetMapping("/list/{leaderId}")
-    public ResponseEntity<List<StudyclubDTO>> findStudyclubsByLeaderId(@PathVariable int leaderId) {
+    public ResponseEntity<List<StudyclubDTO>> findStudyclubsByLeaderId(@PathVariable("leaderId") int leaderId) {
 
         List<StudyclubDTO> studyclubList = studyclubService.findStudyclubsByLeaderId(leaderId);
 
@@ -34,7 +32,7 @@ public class StudyclubController {
 
     // 스터디클럽 아이디로 스터디클럽 상세 정보 조회
     @GetMapping("/detail/{studyclubId}")
-    public ResponseEntity<StudyclubDTO> findStudyclubById(@PathVariable int studyclubId) {
+    public ResponseEntity<StudyclubDTO> findStudyclubById(@PathVariable("studyclubId") int studyclubId) {
 
         StudyclubDTO studyclub = studyclubService.findStudyclubById(studyclubId);
 
@@ -43,7 +41,7 @@ public class StudyclubController {
 
     // 스터디클럽 신규 등록
     @PostMapping("/regist/{leaderId}")
-    public ResponseEntity<StudyclubDTO> registStudyClub(@RequestBody StudyclubVO studyclubVO, @PathVariable int leaderId) {
+    public ResponseEntity<StudyclubDTO> registStudyClub(@RequestBody StudyclubVO studyclubVO, @PathVariable("leaderId") int leaderId) {
 
         StudyclubDTO studyclub = studyclubService.registStudyclub(studyclubVO, leaderId);
 
@@ -52,7 +50,7 @@ public class StudyclubController {
 
     // 스터디클럽 내용 수정(기존 스터디클럽 내용 조회해서 보여주기)
     @PutMapping("/modify/{studyclubId}")
-    public ResponseEntity<StudyclubDTO> modifyStudyclub(@PathVariable int studyclubId, @RequestBody StudyclubVO studyclubVO) {
+    public ResponseEntity<StudyclubDTO> modifyStudyclub(@PathVariable("studyclubId") int studyclubId, @RequestBody StudyclubVO studyclubVO) {
 
         StudyclubDTO studyclub = studyclubService.modifyStudyclub(studyclubId, studyclubVO);
 
@@ -61,7 +59,7 @@ public class StudyclubController {
 
     // 스터디클럽 삭제 상태로 변경
     @PutMapping("/delete/{studyclubId}")
-    public ResponseEntity<StudyclubDTO> deleteStudyclub(@PathVariable int studyclubId) {
+    public ResponseEntity<StudyclubDTO> deleteStudyclub(@PathVariable("studyclubId") int studyclubId) {
 
         StudyclubDTO studyclub = studyclubService.deleteStudyclub(studyclubId);
 
@@ -77,7 +75,7 @@ public class StudyclubController {
     }
 
     @GetMapping("/category/{studyId}")
-    public ResponseEntity<StudyCategoryDTO> findStudyCategoryById(@PathVariable int studyId) {
+    public ResponseEntity<StudyCategoryDTO> findStudyCategoryById(@PathVariable("studyId") int studyId) {
 
         StudyCategoryDTO studyCategory= studyclubService.findStudyCategoryById(studyId);
 
@@ -94,7 +92,7 @@ public class StudyclubController {
 
     // 스터디 카테고리별 시험일 목록 조회
     @GetMapping("/exam/{studyId}")
-    public ResponseEntity<List<ExamDTO>> findExamsByStudyId(@PathVariable int studyId) {
+    public ResponseEntity<List<ExamDTO>> findExamsByStudyId(@PathVariable("studyId") int studyId) {
 
         List<ExamDTO> examList = studyclubService.findExamsByStudyId(studyId);
 
@@ -103,7 +101,7 @@ public class StudyclubController {
 
     // 스터디 카테고리별 목표 목록 조회
     @GetMapping("/goal/{studyId}")
-    public ResponseEntity<List<GoalDTO>> findGoalsByStudyId(@PathVariable int studyId) {
+    public ResponseEntity<List<GoalDTO>> findGoalsByStudyId(@PathVariable("studyId") int studyId) {
 
         List<GoalDTO> goalList = studyclubService.findGoalsByStudyId(studyId);
 
@@ -111,7 +109,7 @@ public class StudyclubController {
     }
 
     @GetMapping("/study-exam/{clubId}")
-    public ResponseEntity<ExamDTO> findExamByClubId(@PathVariable int clubId) {
+    public ResponseEntity<ExamDTO> findExamByClubId(@PathVariable("clubId") int clubId) {
 
         ExamDTO exam = studyclubService.findExamByClubId(clubId);
 
@@ -119,7 +117,7 @@ public class StudyclubController {
     }
 
     @GetMapping("/study-goal/{clubId}")
-    public ResponseEntity<GoalDTO> findGoalByClubId(@PathVariable int clubId) {
+    public ResponseEntity<GoalDTO> findGoalByClubId(@PathVariable("clubId") int clubId) {
 
         GoalDTO goal = studyclubService.findGoalByClubId(clubId);
 
