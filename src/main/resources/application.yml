@@ -9,7 +9,7 @@ spring:
 
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: ENC(rCb0vbm/6YpzYgb2GfghWa0aYe9nV/KQzYCDLWYQxfdSMzrcljrcAWypoPScxTnc)
+    url: ENC(E7huCTzdt6/W2uc0zB5gvAe/75ODq9G7agaiUGIXe2zou8KeqXPWKgm3b7DT5s6U)
     username: ENC(vxlNvVtFe811WHs1mQGPXw==)
     password: ENC(d6hTP/Pj2kTlcyWQSLXIXw==)
 
