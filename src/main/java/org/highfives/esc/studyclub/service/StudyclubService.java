@@ -142,8 +142,7 @@ public class StudyclubService {
 
     public StudyCategoryDTO findStudyCategoryByClubId(int clubId) {
 
-        StudyclubExam studyclubExam = studyclubExamRepository.findByClubId(clubId);
-        Goal goal = goalRepository.findById(studyclubExam.getGoalId()).orElseThrow(IllegalArgumentException:: new);
+        GoalDTO goal = findGoalByClubId(clubId);
         StudyCategoryDTO studyCategory = findStudyCategoryById(goal.getStudyId());
 
         return studyCategory;

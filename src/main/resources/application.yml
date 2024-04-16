@@ -27,3 +27,7 @@ token:
 jasypt:
   encryptor:
     bean: jasyptStringEncryptor
+
+mail:
+  id: ENC(tzW2oh9b3Wok7IocABRwov+8rAfBCWTj)
+  pwd: ENC(SG3fPii2hBFHco8Rx+scChrb9CkOPwsA)
