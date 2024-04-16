@@ -8,6 +8,8 @@ import org.highfives.esc.user.repository.StudyclubMemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Slf4j
 public class StudyclubMemberServiceImpl implements StudyclubMemberService {
@@ -23,11 +25,12 @@ public class StudyclubMemberServiceImpl implements StudyclubMemberService {
     }
 
     @Override
-    public StudyclubMemberDTO insetMemberById(String memberId, String studyclubId) {
+    public StudyclubMemberDTO insetMemberById(StudyclubMemberDTO studyclubMemberDTOData) {
 
+        log.info("log ={}",studyclubMemberDTOData);
         StudyclubMember studyclubMember = StudyclubMember.builder()
-                .memberId(Integer.parseInt(memberId))
-                .studyclubId(Integer.parseInt(studyclubId))
+                .memberId(studyclubMemberDTOData.getMemberId())
+                .studyclubId(studyclubMemberDTOData.getStudyclubId())
                 .memberType("T")
                 .build();
 

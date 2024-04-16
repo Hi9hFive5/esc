@@ -29,11 +29,14 @@ class StudyclubMemberControllerTests {
     @Transactional
     void insertMemberById() {
         // Given
-        String memberId = "1";
-        String studyclubId = "1";
+        StudyclubMemberDTO studyclubMemberDTO = StudyclubMemberDTO.builder()
+                .memberId(1)
+                .studyclubId(1)
+                .memberType("T")
+                .build();
 
         // When
-        StudyclubMemberDTO studyclubMemberTest = studyclubMemberService.insetMemberById(memberId, studyclubId);
+        StudyclubMemberDTO studyclubMemberTest = studyclubMemberService.insetMemberById(studyclubMemberDTO);
 
         // Then
         assertThat(studyclubMemberTest).isNotNull();

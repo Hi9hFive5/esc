@@ -70,6 +70,9 @@ public class WebSecurity {
                                 .requestMatchers(new AntPathRequestMatcher("/studyLog/**", "GET")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/studyLog/**", "POST")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/studyLog/**", "PUT")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/studyclubMember/**", "GET")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/studyclubMember/**", "POST")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/studyclubMember/**", "PUT")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/chat/room/**")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/chat/**")).permitAll()
 

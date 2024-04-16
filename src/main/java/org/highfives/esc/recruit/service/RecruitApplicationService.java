@@ -8,6 +8,9 @@ import org.highfives.esc.recruit.repository.RecruitApplicationRepository;
 import org.highfives.esc.recruit.repository.RecruitPostRepository;
 import org.highfives.esc.studyclub.entity.Studyclub;
 import org.highfives.esc.studyclub.repository.StudyclubRepository;
+import org.highfives.esc.user.dto.StudyclubMemberDTO;
+import org.highfives.esc.user.entity.StudyclubMember;
+import org.highfives.esc.user.repository.StudyclubMemberRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,12 +27,15 @@ public class RecruitApplicationService {
     private final RecruitPostRepository recruitPostRepository;
     private final StudyclubRepository studyclubRepository;
 
+    private final StudyclubMemberRepository studyclubMemberRepository;
+
     @Autowired
-    public RecruitApplicationService(ModelMapper mapper, RecruitApplicationRepository recruitApplicationRepository, RecruitPostRepository recruitPostRepository, StudyclubRepository studyclubRepository) {
+    public RecruitApplicationService(ModelMapper mapper, RecruitApplicationRepository recruitApplicationRepository, RecruitPostRepository recruitPostRepository, StudyclubRepository studyclubRepository, StudyclubMemberRepository studyclubMemberRepository) {
         this.mapper = mapper;
         this.recruitApplicationRepository = recruitApplicationRepository;
         this.recruitPostRepository = recruitPostRepository;
         this.studyclubRepository = studyclubRepository;
+        this.studyclubMemberRepository = studyclubMemberRepository;
     }
 
     @Transactional(readOnly = true)
@@ -92,6 +98,8 @@ public class RecruitApplicationService {
             studyclub.setMemberCount(studyclub.getMemberCount() + 1);
         }
         else recruitPost.setRecruitStatus("Y");
+
+
 
         return mapper.map(recruitApplication, RecruitApplicationDTO.class);
     }

@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/studyclubMember")
 public class StudyclubMemberController {
@@ -18,11 +20,10 @@ public class StudyclubMemberController {
     }
 
     /* 설명. 스터디 클럽 멤버 추가 기능 */
-    @GetMapping("/insertMember/{memberId}/{studyclubId}")
-    public ResponseEntity<StudyclubMemberDTO> insertMemberById(@PathVariable("memberId") String memberId,
-                                                               @PathVariable("studyclubId") String studyclubId) {
+    @PostMapping("/insertMember")
+    public ResponseEntity<StudyclubMemberDTO> insertMemberById(StudyclubMemberDTO studyclubMemberDTOData) {
 
-        StudyclubMemberDTO studyclubMemberDTO = studyclubMemberService.insetMemberById(memberId, studyclubId);
+        StudyclubMemberDTO studyclubMemberDTO = studyclubMemberService.insetMemberById(studyclubMemberDTOData);
 
         return ResponseEntity.ok().body(studyclubMemberDTO);
     }
