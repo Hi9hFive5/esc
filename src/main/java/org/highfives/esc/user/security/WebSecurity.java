@@ -55,6 +55,7 @@ public class WebSecurity {
                                 .requestMatchers(new AntPathRequestMatcher("/**", "PUT")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/**", "DELETE")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/metrics")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/actuator/prometheus")).permitAll()
                                 .anyRequest().authenticated()
                 )
                 .authenticationManager(authenticationManager)
