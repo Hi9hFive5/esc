@@ -68,10 +68,10 @@ public class StudyScheduleController {
     public ResponseEntity<ResponseScheduleVO> saveStudySchedule(
             @RequestBody RequestScheduleVO requestScheduleVO) {
 
-        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime startDatetime = LocalDateTime.parse(requestScheduleVO.getStart(), formatter1);
 
-        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime endDatetime = LocalDateTime.parse(requestScheduleVO.getEnd(), formatter2);
 
         String useStatusStr = String.valueOf(requestScheduleVO.getUseStatus());
@@ -83,7 +83,7 @@ public class StudyScheduleController {
         studyScheduleDTO.setContent(requestScheduleVO.getContent());
         studyScheduleDTO.setStartDatetime(startDatetime);
         studyScheduleDTO.setEndDatetime(endDatetime);
-        studyScheduleDTO.setUseState(useStatus);
+        studyScheduleDTO.setUseStatus(useStatus);
         studyScheduleDTO.setWriterId(requestScheduleVO.getWriterId());
         studyScheduleDTO.setStudyclubId(requestScheduleVO.getStudyclubId());
 
@@ -103,14 +103,12 @@ public class StudyScheduleController {
             @RequestBody RequestScheduleVO requestScheduleVO) {
         System.out.println(requestScheduleVO);
 
-        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        System.out.println("=====================1");
+        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime startDatetime = LocalDateTime.parse(requestScheduleVO.getStart(), formatter1);
-        System.out.println("=====================2");
 
-        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime endDatetime = LocalDateTime.parse(requestScheduleVO.getEnd(), formatter2);
-        System.out.println("=====================");
+
         StudyScheduleDTO studyScheduleDTO = new StudyScheduleDTO();
 
         studyScheduleDTO.setId(requestScheduleVO.getId());
@@ -118,8 +116,6 @@ public class StudyScheduleController {
         studyScheduleDTO.setContent(requestScheduleVO.getContent());
         studyScheduleDTO.setStartDatetime(startDatetime);
         studyScheduleDTO.setEndDatetime(endDatetime);
-
-        System.out.println(studyScheduleDTO);
 
         ArrayList<Integer> participantList = requestScheduleVO.getParticipantList();
         studyScheduleService.modifyStudySchedule(studyScheduleDTO, participantList);

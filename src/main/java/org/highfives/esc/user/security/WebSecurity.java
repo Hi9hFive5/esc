@@ -70,11 +70,20 @@ public class WebSecurity {
                                 .requestMatchers(new AntPathRequestMatcher("/studyLog/**", "GET")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/studyLog/**", "POST")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/studyLog/**", "PUT")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/member-schedule/**", "GET")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/member-schedule/**", "POST")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/member-schedule/**", "PUT")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/member-schedule/**", "DELETE")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/study-schedule/**", "GET")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/study-schedule/**", "POST")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/study-schedule/**", "PUT")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/study-schedule/**", "DELETE")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/studyclubMember/**", "GET")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/studyclubMember/**", "POST")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/studyclubMember/**", "PUT")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/chat/room/**")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/chat/**")).permitAll()
+//
 
 //                .requestMatchers("/**").access(
 //                        new WebExpressionAuthorizationManager("hasIpAddress('127.0.0.1') or hasIpAddress('192.168.0.26')"))

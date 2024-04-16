@@ -15,16 +15,16 @@ public class StudyScheduleDTO {
     private String content;                 // 일정 내용
     private LocalDateTime startDatetime;    // 일정 시작 시간
     private LocalDateTime endDatetime;      // 일정 종료 시간
-    private char useState;                  // 일정 삭제 여부
+    private char useStatus;                  // 일정 삭제 여부
     private int writerId;                   // 일정 작성 멤버(리더)
     private int studyclubId;                // 해당 스터디클럽
 
-    public StudyScheduleDTO(String title, String content, LocalDateTime startDatetime, LocalDateTime endDatetime, char useState, int writerId, int studyclubId) {
+    public StudyScheduleDTO(String title, String content, LocalDateTime startDatetime, LocalDateTime endDatetime, char useStatus, int writerId, int studyclubId) {
         this.title = title;
         this.content = content;
         this.startDatetime = startDatetime;
         this.endDatetime = endDatetime;
-        this.useState = useState;
+        this.useStatus = useStatus;
         this.writerId = writerId;
         this.studyclubId = studyclubId;
     }

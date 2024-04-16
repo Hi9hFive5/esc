@@ -25,7 +25,7 @@ public class RecruitController {
     }
 
     @GetMapping("/list/{leaderId}")
-    public ResponseEntity<List<RecruitPostDTO>> findRecruitPostByLeaderId(@PathVariable int leaderId) {
+    public ResponseEntity<List<RecruitPostDTO>> findRecruitPostByLeaderId(@PathVariable("leaderId") int leaderId) {
 
         List<RecruitPostDTO> recruitPostList = recruitService.findRecruitPostsByLeaderId(leaderId);
 
@@ -33,7 +33,7 @@ public class RecruitController {
     }
 
     @GetMapping("/detail/{postId}")
-    public ResponseEntity<RecruitPostDTO> findRecruitPostById(@PathVariable int postId) {
+    public ResponseEntity<RecruitPostDTO> findRecruitPostById(@PathVariable("postId") int postId) {
 
         RecruitPostDTO recruitPost = recruitService.findRecruitPostById(postId);
 
@@ -42,7 +42,7 @@ public class RecruitController {
 
     // 모집글 작성
     @PostMapping("/regist/{clubId}")
-    public ResponseEntity<RecruitPostDTO> registRecruitPost(@RequestBody RecruitPostVO recruitPostVO, @PathVariable int clubId) {
+    public ResponseEntity<RecruitPostDTO> registRecruitPost(@RequestBody RecruitPostVO recruitPostVO, @PathVariable("clubId") int clubId) {
 
         RecruitPostDTO recruitPost = recruitService.registRecruitPost(recruitPostVO, clubId);
 
@@ -51,7 +51,7 @@ public class RecruitController {
 
     // 모집글 내용 수정(기존 모집글 내용 조회해서 보여주기)
     @PutMapping("/modify/{recruitId}")
-    public ResponseEntity<RecruitPostDTO> modifyRecruitPost(@PathVariable int recruitId, @RequestBody RecruitPostVO recruitPostVO) {
+    public ResponseEntity<RecruitPostDTO> modifyRecruitPost(@PathVariable("recruitId") int recruitId, @RequestBody RecruitPostVO recruitPostVO) {
 
         RecruitPostDTO recruitPost = recruitService.modifyRecruitPost(recruitId, recruitPostVO);
 
@@ -60,7 +60,7 @@ public class RecruitController {
 
     // 모집글 삭제 상태로 변경
     @PutMapping("/delete/{recruitId}")
-    public ResponseEntity<RecruitPostDTO> deleteRecruitPost(@PathVariable int recruitId) {
+    public ResponseEntity<RecruitPostDTO> deleteRecruitPost(@PathVariable("recruitId") int recruitId) {
 
         RecruitPostDTO recruitPost = recruitService.deleteRecruitPost(recruitId);
 
