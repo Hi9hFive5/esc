@@ -59,7 +59,7 @@ public class UserServiceTest {
     @Test
     void 이메일_중복체크_이메일이_존재할때() {
         //given
-        String email = "test@naver.com";
+        String email = "kangtw@gmail.com";
 
         //when
         String check = userService.emailExCheck(email);
@@ -83,14 +83,14 @@ public class UserServiceTest {
     @Test
     void 이름과_닉네임으로_이메일찾기() {
         //given
-        String name = "동현";
-        String nickname = "aa";
+        String name = "강태우";
+        String nickname = "kangtw";
 
         //when
         String email = userService.findUserEmail(name, nickname);
 
         //then
-        assertThat(email).isEqualTo("baek0810@naver.com");
+        assertThat(email).isEqualTo("kangtw@gmail.com");
     }
 
     @Test

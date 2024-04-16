@@ -1,5 +1,6 @@
 package org.highfives.esc;
 
+import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import org.highfives.esc.crawling.service.ExamCrawler;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

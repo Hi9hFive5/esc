@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'org.highfives'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.2-SNAPSHOT'
 
 java {
     sourceCompatibility = '17'
@@ -50,6 +50,14 @@ dependencies {
     implementation 'org.springframework:spring-context-support:5.3.9'
 
     implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    //jasypt용 디펜던시
+    implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.5'
+}
+
+test {
+    useJUnitPlatform()
+    systemProperty 'jasypt.encryptor.password', findProperty("jasypt.encryptor.password")
 }
 
 tasks.named('test') {
