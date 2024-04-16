@@ -14,6 +14,8 @@ public class StudyclubLogDTO {
 
     private String content;
 
+    private String contentInfo;
+
     private String studydate;
 
     private String enrolldate;
@@ -23,9 +25,10 @@ public class StudyclubLogDTO {
     private int scheduleId;
 
     @Builder
-    public StudyclubLogDTO(int id, String content, String studydate, String enrolldate, int studyclubId, int scheduleId) {
+    public StudyclubLogDTO(int id, String content, String contentInfo, String studydate, String enrolldate, int studyclubId, int scheduleId) {
         this.id = id;
         this.content = content;
+        this.contentInfo = contentInfo;
         this.studydate = studydate;
         this.enrolldate = enrolldate;
         this.studyclubId = studyclubId;

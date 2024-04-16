@@ -6,7 +6,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.*;
 
-@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -14,10 +13,12 @@ import lombok.*;
 @ToString
 public class StudyclubLogInfoDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String content;
+
+    private String contentInfo;
+
     private int studyclubId;
 
 }
