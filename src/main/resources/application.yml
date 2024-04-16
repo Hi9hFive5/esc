@@ -29,4 +29,10 @@ jasypt:
     bean: jasyptStringEncryptor
 
 server:
-  port: 10001 
+  port: 10001
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, prometheus
