@@ -66,11 +66,11 @@ class MemberScheduleServiceTest {
         DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime end = LocalDateTime.parse(endTime, formatter2);
 
-        MemberScheduleDTO memberScheduleDTO = new MemberScheduleDTO(start, end, 6, 6);
+        MemberScheduleDTO memberScheduleDTO = new MemberScheduleDTO(start, end, 3, 3);
 
         memberScheduleService.saveMemberSchedule(memberScheduleDTO);
 
-        assertNotNull(memberScheduleService.findMemberScheduleByStudyclubIdAndMemberId(6, 6));
+        assertNotNull(memberScheduleService.findMemberScheduleByStudyclubIdAndMemberId(3, 3));
     }
 
     @Test
