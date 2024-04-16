@@ -34,6 +34,7 @@ class StudyclubLogControllerTests {
         // Given
         StudyclubLogDTO studyclubLogDTO = StudyclubLogDTO.builder()
                 .content("test")
+                .contentInfo("test")
                 .studydate("0000-00-00")
                 .enrolldate("0000-00-00")
                 .studyclubId(1)
@@ -58,6 +59,7 @@ class StudyclubLogControllerTests {
         // Given
         StudyclubLogDTO studyclubLogDTO = StudyclubLogDTO.builder()
                 .content("test")
+                .contentInfo("test")
                 .studydate("0000-00-00")
                 .enrolldate("0000-00-00")
                 .studyclubId(1)
