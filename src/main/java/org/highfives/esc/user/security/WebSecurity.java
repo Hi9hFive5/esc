@@ -54,11 +54,7 @@ public class WebSecurity {
                                 .requestMatchers(new AntPathRequestMatcher("/**", "GET")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/**", "PUT")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/**", "DELETE")).permitAll()
-
-//
-
-//                .requestMatchers("/**").access(
-//                        new WebExpressionAuthorizationManager("hasIpAddress('127.0.0.1') or hasIpAddress('192.168.0.26')"))
+                                .requestMatchers(new AntPathRequestMatcher("/metric")).permitAll()
                                 .anyRequest().authenticated()
                 )
                 .authenticationManager(authenticationManager)
@@ -74,5 +70,6 @@ public class WebSecurity {
     private AuthenticationFilter getAuthenticationFilter(AuthenticationManager authenticationManager) throws Exception {
         return new AuthenticationFilter(authenticationManager, userService, env);
     }
+
 
 }
