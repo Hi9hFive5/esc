@@ -22,6 +22,7 @@ public class StudyclubMemberController {
     /* 설명. 스터디 클럽 멤버 추가 기능 */
     @PostMapping("/insertMember")
     public ResponseEntity<StudyclubMemberDTO> insertMemberById(@RequestBody StudyclubMemberDTO studyclubMemberDTOData) {
+
         StudyclubMemberDTO studyclubMemberDTO = studyclubMemberService.insetMemberById(studyclubMemberDTOData);
 
         return ResponseEntity.ok().body(studyclubMemberDTO);

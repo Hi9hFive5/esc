@@ -32,7 +32,7 @@ public class StudyclubLogController {
 
     /* 설명. 스터디 로그 수정 기능 */
     @PutMapping("/update")
-    public ResponseEntity<StudyclubLogDTO> updateStudyLog(@RequestBody StudyclubLogDTO studyclubLogDTOData){
+    public ResponseEntity<StudyclubLogDTO> updateStudyLog(@RequestBody StudyclubLogDTO studyclubLogDTOData) throws IllegalAccessException {
 
         StudyclubLogDTO studyclubLogDTO = studyclubLogService.updateStudyclubLog(studyclubLogDTOData);
 
@@ -51,7 +51,7 @@ public class StudyclubLogController {
 
     /* 설명. 스터디 로그 조회 기능 */
     @GetMapping("/find/{id}")
-    public ResponseEntity<StudyclubLogDTO> findStudyLogById(@PathVariable String id) throws IllegalAccessException {
+    public ResponseEntity<StudyclubLogDTO> findStudyLogById(@PathVariable String id){
 
         StudyclubLogDTO studyclubLogDTO = studyclubLogService.findStudyLogById(id);
 

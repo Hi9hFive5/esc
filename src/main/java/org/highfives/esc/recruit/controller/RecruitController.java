@@ -67,4 +67,13 @@ public class RecruitController {
         return ResponseEntity.ok().body(recruitPost);
     }
 
+    @GetMapping("/orderby/{title}")
+    public ResponseEntity<RecruitPostDTO> orderByRecruitPost(@PathVariable("title") String title) {
+
+        RecruitPostDTO recruitPost = recruitService.orderByRecruitPost(title);
+
+        return ResponseEntity.ok().body(recruitPost);
+    }
+
+
 }

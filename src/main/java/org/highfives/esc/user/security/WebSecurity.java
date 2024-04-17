@@ -50,21 +50,24 @@ public class WebSecurity {
 
         /* 설명. /user-service/users/** 패턴을 제외하고는 특정 IP 주소에서 온 요청에만 접근을 허용하며, 그 외의 모든 요청은 인증된 사용자에게만 허용한다는 것을 보여준다. */
         http.authorizeHttpRequests((authz) -> authz
+
 //                .requestMatchers(new AntPathRequestMatcher("/users/**")).permitAll());
 //                .requestMatchers(new AntPathRequestMatcher("/user-service/users/**")).permitAll());
 //                                .requestMatchers(new AntPathRequestMatcher("/users", "POST")).permitAll()
 //                                .requestMatchers(new AntPathRequestMatcher("/health_check", "GET")).hasRole("ENTERPRISE")
 //                                .requestMatchers(new AntPathRequestMatcher("/users/**", "GET")).permitAll()
 //                                .requestMatchers(new AntPathRequestMatcher("/actuator/**")).permitAll()
-                                .requestMatchers(new AntPathRequestMatcher("/**", "GET")).permitAll()
-                                .requestMatchers(new AntPathRequestMatcher("/**", "PUT")).permitAll()
-                                .requestMatchers(new AntPathRequestMatcher("/**", "POST")).permitAll()
-                                .requestMatchers(new AntPathRequestMatcher("/**", "DELETE")).permitAll()
-
-//
 
 //                .requestMatchers("/**").access(
 //                        new WebExpressionAuthorizationManager("hasIpAddress('127.0.0.1') or hasIpAddress('192.168.0.26')"))
+
+                                .requestMatchers(new AntPathRequestMatcher("/**", "POST")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/**", "GET")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/**", "PUT")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/**", "DELETE")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/metrics")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/actuator/prometheus")).permitAll()
+
                                 .anyRequest().authenticated()
                 )
                 .authenticationManager(authenticationManager)
@@ -80,5 +83,6 @@ public class WebSecurity {
     private AuthenticationFilter getAuthenticationFilter(AuthenticationManager authenticationManager) throws Exception {
         return new AuthenticationFilter(authenticationManager, userService, env);
     }
+
 
 }

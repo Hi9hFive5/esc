@@ -13,10 +13,12 @@ import lombok.*;
 @ToString
 public class StudyclubLogInfoDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String content;
+
+    private String contentInfo;
+
     private int studyclubId;
 
 }

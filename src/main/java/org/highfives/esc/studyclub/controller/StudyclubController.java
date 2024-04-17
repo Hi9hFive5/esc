@@ -86,7 +86,7 @@ public class StudyclubController {
     public ResponseEntity<StudyCategoryDTO> findStudyCategoryByClubId(@PathVariable("clubId") int clubId) {
 
         StudyCategoryDTO studyCategory= studyclubService.findStudyCategoryByClubId(clubId);
-        System.out.println(studyCategory);
+
         return ResponseEntity.ok().body(studyCategory);
     }
 

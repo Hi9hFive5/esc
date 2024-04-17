@@ -9,12 +9,12 @@ import java.util.List;
 public interface StudyclubLogService {
     StudyclubLogDTO insertStudyLog(StudyclubLogDTO studyclubLogDTOData);
 
-    StudyclubLogDTO updateStudyclubLog(StudyclubLogDTO studyclubLogDTOData);
+    StudyclubLogDTO updateStudyclubLog(StudyclubLogDTO studyclubLogDTOData) throws IllegalAccessException;
 
 
     void deleteStudyLog(String id);
 
-    StudyclubLogDTO findStudyLogById(String id) throws IllegalAccessException;
+    StudyclubLogDTO findStudyLogById(String id);
 
     List<StudyclubLogInfoDTO> findStudyclubLogById(String studyclubId);
 

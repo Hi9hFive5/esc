@@ -114,4 +114,13 @@ public class RecruitService {
 
         return mapper.map(recruitPost, RecruitPostDTO.class);
     }
+
+    public RecruitPostDTO orderByRecruitPost(String title) {
+
+        RecruitPost recruitPost = recruitPostRepository.orderByRecruitPost(title);
+
+
+        return mapper.map(recruitPost, RecruitPostDTO.class);
+    }
+
 }
