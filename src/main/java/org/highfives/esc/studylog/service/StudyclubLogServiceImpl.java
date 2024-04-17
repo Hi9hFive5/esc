@@ -32,8 +32,20 @@ public class StudyclubLogServiceImpl implements StudyclubLogService {
     @Transactional
     public StudyclubLogDTO insertStudyLog(StudyclubLogDTO studyclubLogDTOData) {
 
+        Date currentDate = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String formattedDate = dateFormat.format(currentDate);
 
-        StudyclubLog studyclubLog = studyclubLogMapper.studyclubLogDTOTostudyclubLog(studyclubLogDTOData);
+        StudyclubLogDTO insertData = StudyclubLogDTO.builder()
+                .content(studyclubLogDTOData.getContent())
+                .contentInfo(studyclubLogDTOData.getContentInfo())
+                .studydate(studyclubLogDTOData.getStudydate())
+                .enrolldate(formattedDate)
+                .studyclubId(studyclubLogDTOData.getStudyclubId())
+                .scheduleId(studyclubLogDTOData.getScheduleId())
+                .build();
+
+        StudyclubLog studyclubLog = studyclubLogMapper.studyclubLogDTOTostudyclubLog(insertData);
 
         studyclubLogRepository.save(studyclubLog);
 
