@@ -26,6 +26,7 @@ public class StudyclubMemberServiceImpl implements StudyclubMemberService {
 
     @Override
     public StudyclubMemberDTO insetMemberById(StudyclubMemberDTO studyclubMemberDTOData) {
+        System.out.println("출력" + studyclubMemberDTOData);
 
         log.info("log ={}",studyclubMemberDTOData);
         StudyclubMember studyclubMember = StudyclubMember.builder()
@@ -33,6 +34,7 @@ public class StudyclubMemberServiceImpl implements StudyclubMemberService {
                 .studyclubId(studyclubMemberDTOData.getStudyclubId())
                 .memberType("T")
                 .build();
+
 
         studyclubMemberRepository.save(studyclubMember);
 

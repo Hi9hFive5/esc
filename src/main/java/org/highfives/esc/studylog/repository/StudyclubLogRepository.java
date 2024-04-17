@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public interface StudyclubLogRepository extends JpaRepository<StudyclubLog, Integer> {
 
-    @Query(value = "SELECT new org.highfives.esc.studylog.dto.StudyclubLogInfoDTO(s2.id, s1.content, s1.studyclubId) FROM StudyclubLog s1 JOIN Studyclub s2 ON s2.id = s1.studyclubId WHERE s1.studyclubId = :studyclub_id")
+    @Query(value = "SELECT new org.highfives.esc.studylog.dto.StudyclubLogInfoDTO(s1.id, s1.content, s1.studyclubId) FROM StudyclubLog s1 JOIN Studyclub s2 ON s2.id = s1.studyclubId WHERE s1.studyclubId = :studyclub_id")
     List<StudyclubLogInfoDTO> findStudyclubLogById(@Param("studyclub_id") String studyclubId);
 
     @Query(value = "SELECT new org.highfives.esc.studylog.dto.StudyclubLogMemberInfoDTO(s3.id, s1.studyclubId, s1.memberId, s3.content) FROM StudyclubMember s1 " +
