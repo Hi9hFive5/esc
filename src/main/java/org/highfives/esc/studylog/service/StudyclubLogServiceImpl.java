@@ -1,6 +1,8 @@
 package org.highfives.esc.studylog.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.highfives.esc.schedule.entity.StudySchedule;
+import org.highfives.esc.schedule.repository.StudyScheduleRepository;
 import org.highfives.esc.studylog.dao.StudyclubLogMapper;
 import org.highfives.esc.studylog.dto.StudyclubLogDTO;
 import org.highfives.esc.studylog.dto.StudyclubLogInfoDTO;
@@ -22,24 +24,31 @@ public class StudyclubLogServiceImpl implements StudyclubLogService {
     private final StudyclubLogRepository studyclubLogRepository;
     private final StudyclubLogMapper studyclubLogMapper;
 
+    private final StudyScheduleRepository studyScheduleRepository;
+
     @Autowired
-    public StudyclubLogServiceImpl(StudyclubLogRepository studyclubLogRepository, StudyclubLogMapper studyclubLogMapper) {
+    public StudyclubLogServiceImpl(StudyclubLogRepository studyclubLogRepository, StudyclubLogMapper studyclubLogMapper, StudyScheduleRepository studyScheduleRepository) {
         this.studyclubLogRepository = studyclubLogRepository;
         this.studyclubLogMapper = studyclubLogMapper;
+        this.studyScheduleRepository = studyScheduleRepository;
     }
 
-    @Override
     @Transactional
+    @Override
     public StudyclubLogDTO insertStudyLog(StudyclubLogDTO studyclubLogDTOData) {
+
+        StudySchedule scheduleData = studyScheduleRepository.findById(studyclubLogDTOData.getScheduleId());
 
         Date currentDate = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String formattedDate = dateFormat.format(currentDate);
 
+
+
         StudyclubLogDTO insertData = StudyclubLogDTO.builder()
                 .content(studyclubLogDTOData.getContent())
                 .contentInfo(studyclubLogDTOData.getContentInfo())
-                .studydate(studyclubLogDTOData.getStudydate())
+                .studydate(scheduleData.getStartDatetime())
                 .enrolldate(formattedDate)
                 .studyclubId(studyclubLogDTOData.getStudyclubId())
                 .scheduleId(studyclubLogDTOData.getScheduleId())
@@ -54,6 +63,7 @@ public class StudyclubLogServiceImpl implements StudyclubLogService {
         return studyclubLogDTOData;
     }
 
+
     @Override
     @Transactional
     public StudyclubLogDTO updateStudyclubLog(StudyclubLogDTO studyclubLogDTOData) {
@@ -66,6 +76,7 @@ public class StudyclubLogServiceImpl implements StudyclubLogService {
         String formattedDate = dateFormat.format(currentDate);
 
         log.info("데이터 값={}",findStudyLogDatabyId);
+        log.info("데이터 값2={}",findStudyLogDatabyId.getStudydate());
 
         StudyclubLogDTO studyclubLogDTO = StudyclubLogDTO.builder()
                 .id(studyclubLogDTOData.getId())

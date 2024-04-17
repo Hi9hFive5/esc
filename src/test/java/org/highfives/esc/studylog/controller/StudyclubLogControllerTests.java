@@ -43,7 +43,6 @@ class StudyclubLogControllerTests {
                 .id(1)
                 .content("test")
                 .contentInfo("test")
-                .studydate("0000-00-00")
                 .enrolldate(formattedDate)
                 .studyclubId(1)
                 .scheduleId(1)

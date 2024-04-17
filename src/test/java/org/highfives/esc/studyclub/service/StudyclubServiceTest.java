@@ -41,7 +41,7 @@ class StudyclubServiceTest {
         studyclubVO.setName("이름");
         studyclubVO.setIntroduce("소개");
         studyclubVO.setStudyId(1);
-        studyclubVO.setExamId(1);
+        studyclubVO.setExamId(2);
         studyclubVO.setGoalId(1);
 
         StudyclubDTO studyclub = studyclubService.registStudyclub(studyclubVO, leaderId);
