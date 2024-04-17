@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -27,7 +28,7 @@ public class StudyclubLog {
     private String contentInfo;
 
     @Column(name = "studydate", length = 50, nullable = false)
-    private String studydate;
+    private LocalDateTime studydate;
 
     @Column(name = "enrolldate", length = 50, nullable = false)
     private String enrolldate;
@@ -39,7 +40,7 @@ public class StudyclubLog {
     private int scheduleId;
 
     @Builder
-    public StudyclubLog(int id, String content, String contentInfo, String studydate, String enrolldate, int studyclubId, int scheduleId) {
+    public StudyclubLog(int id, String content, String contentInfo, LocalDateTime studydate, String enrolldate, int studyclubId, int scheduleId) {
         this.id = id;
         this.content = content;
         this.contentInfo = contentInfo;

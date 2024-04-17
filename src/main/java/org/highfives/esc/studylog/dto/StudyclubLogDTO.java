@@ -3,6 +3,7 @@ package org.highfives.esc.studylog.dto;
 import jakarta.persistence.Column;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @NoArgsConstructor
@@ -17,7 +18,7 @@ public class StudyclubLogDTO {
 
     private String contentInfo;
 
-    private String studydate;
+    private LocalDateTime studydate;
 
     private String enrolldate;
 
@@ -26,7 +27,7 @@ public class StudyclubLogDTO {
     private int scheduleId;
 
     @Builder
-    public StudyclubLogDTO(int id, String content, String contentInfo, String studydate, String enrolldate, int studyclubId, int scheduleId) {
+    public StudyclubLogDTO(int id, String content, String contentInfo, LocalDateTime studydate, String enrolldate, int studyclubId, int scheduleId) {
         this.id = id;
         this.content = content;
         this.contentInfo = contentInfo;
