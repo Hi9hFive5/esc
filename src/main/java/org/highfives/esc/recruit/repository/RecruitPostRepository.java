@@ -14,4 +14,7 @@ public interface RecruitPostRepository extends JpaRepository<RecruitPost, Intege
     @Query("SELECT post FROM RecruitPost post WHERE post.writerId = :writerId")
     List<RecruitPost> findAllByLeaderId(@Param("writerId") int writerId);
 
+    @Query("SELECT s FROM RecruitPost s WHERE s.title LIKE CONCAT('%', :title, '%')")
+    RecruitPost orderByRecruitPost(String title);
+
 }

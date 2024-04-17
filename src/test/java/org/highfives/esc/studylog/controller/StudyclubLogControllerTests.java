@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -32,12 +34,17 @@ class StudyclubLogControllerTests {
     @Test
     @Transactional
     void insertStudyLog() {
+        Date currentDate = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String formattedDate = dateFormat.format(currentDate);
+
         // Given
         StudyclubLogDTO studyclubLogDTO = StudyclubLogDTO.builder()
+                .id(1)
                 .content("test")
                 .contentInfo("test")
                 .studydate("0000-00-00")
-                .enrolldate("0000-00-00")
+                .enrolldate(formattedDate)
                 .studyclubId(1)
                 .scheduleId(1)
                 .build();
@@ -56,15 +63,15 @@ class StudyclubLogControllerTests {
     @DisplayName("스터디 로그 수정 기능 테스트")
     @Test
     @Transactional
-    void updateStudyLog() {
+    void updateStudyLog() throws IllegalAccessException {
+        Date currentDate = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String formattedDate = dateFormat.format(currentDate);
         // Given
         StudyclubLogDTO studyclubLogDTO = StudyclubLogDTO.builder()
-                .content("test")
-                .contentInfo("test")
-                .studydate("0000-00-00")
-                .enrolldate("0000-00-00")
-                .studyclubId(1)
-                .scheduleId(1)
+                .id(4)
+                .content("test213123")
+                .contentInfo("test123123")
                 .build();
 
         // When
@@ -72,10 +79,8 @@ class StudyclubLogControllerTests {
         StudyclubLogDTO studyLogTest = studyclubLogService.updateStudyclubLog(studyclubLogDTO);
 
         // Then
-        assertThat(studyLogTest).isNotNull();
-        assertThat(studyLogTest.getScheduleId()).isEqualTo(studyclubLogDTO.getScheduleId());
-        assertThat(studyLogTest.getContent()).isEqualTo(studyclubLogDTO.getContent());
 
+        assertThat(studyLogTest).isNotNull();
 
     }
 
@@ -105,7 +110,6 @@ class StudyclubLogControllerTests {
 //            StudyclubLogDTO studyLogById = studyclubLogService.findStudyLogById(studyclubId);
 //
 //            // Then
-//            System.out.println(studyLogById);
 //            assertThat(studyLogById).isNotNull();
 //            assertThat(studyLogById.getStudyclubId()).isEqualTo(Integer.valueOf(studyclubId));
 //

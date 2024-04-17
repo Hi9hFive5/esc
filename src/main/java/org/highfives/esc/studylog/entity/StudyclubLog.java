@@ -39,7 +39,6 @@ public class StudyclubLog {
     private int scheduleId;
 
     @Builder
-
     public StudyclubLog(int id, String content, String contentInfo, String studydate, String enrolldate, int studyclubId, int scheduleId) {
         this.id = id;
         this.content = content;

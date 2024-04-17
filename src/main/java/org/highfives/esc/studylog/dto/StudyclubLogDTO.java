@@ -5,8 +5,9 @@ import lombok.*;
 
 import java.util.Date;
 
-@Getter
 @NoArgsConstructor
+@Getter
+@Setter
 @ToString
 public class StudyclubLogDTO {
 

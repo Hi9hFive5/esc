@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Slf4j
@@ -43,15 +45,24 @@ public class StudyclubLogServiceImpl implements StudyclubLogService {
     @Override
     @Transactional
     public StudyclubLogDTO updateStudyclubLog(StudyclubLogDTO studyclubLogDTOData) {
+        log.info("logdata = {}",studyclubLogDTOData.getId());
+        log.info("logdata22222 = {}",studyclubLogDTOData);
+        StudyclubLog findStudyLogDatabyId = studyclubLogRepository.findById(studyclubLogDTOData.getId()).orElseThrow(IllegalArgumentException::new);
+
+        Date currentDate = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String formattedDate = dateFormat.format(currentDate);
+
+        log.info("데이터 값={}",findStudyLogDatabyId);
 
         StudyclubLogDTO studyclubLogDTO = StudyclubLogDTO.builder()
                 .id(studyclubLogDTOData.getId())
                 .content(studyclubLogDTOData.getContent())
                 .contentInfo(studyclubLogDTOData.getContentInfo())
-                .studydate(studyclubLogDTOData.getStudydate())
-                .enrolldate(studyclubLogDTOData.getEnrolldate())
-                .studyclubId(studyclubLogDTOData.getStudyclubId())
-                .scheduleId(studyclubLogDTOData.getScheduleId())
+                .studydate(findStudyLogDatabyId.getStudydate())
+                .enrolldate(formattedDate)
+                .studyclubId(findStudyLogDatabyId.getStudyclubId())
+                .scheduleId(findStudyLogDatabyId.getScheduleId())
                 .build();
 
         studyclubLogRepository.save(studyclubLogMapper.studyclubLogDTOTostudyclubLog(studyclubLogDTO));
@@ -67,9 +78,8 @@ public class StudyclubLogServiceImpl implements StudyclubLogService {
     }
 
     @Override
-    public StudyclubLogDTO findStudyLogById(String id) throws IllegalAccessException {
-            StudyclubLog studyclubLog = studyclubLogRepository.findById(Integer.valueOf(id)).orElseThrow(IllegalAccessException::new);
-
+    public StudyclubLogDTO findStudyLogById(String id) {
+            StudyclubLog studyclubLog = studyclubLogRepository.findById(Integer.valueOf(id)).orElseThrow(IllegalArgumentException::new);
             return studyclubLogMapper.studyclubLogTostudyclubLogDTO(studyclubLog);
 
     }
