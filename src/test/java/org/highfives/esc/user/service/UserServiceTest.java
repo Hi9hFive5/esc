@@ -84,7 +84,7 @@ public class UserServiceTest {
     void 이름과_닉네임으로_이메일찾기() {
         //given
         String name = "강태우";
-        String nickname = "태우짱";
+        String nickname = "kangtw";
 
         //when
         String email = userService.findUserEmail(name, nickname);
